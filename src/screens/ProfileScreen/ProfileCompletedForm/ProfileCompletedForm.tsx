@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useMemo } from 'react';
 import cn from 'clsx';
 import { FormikConfig, useFormik } from 'formik';
-import { useMutation } from 'src/client/hooks';
+import { useMutation } from '@apollo/client';
 import { Button, message } from 'antd';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { isNotDefinedString } from 'src/utils/validation';
 import { profileSelectors } from 'src/store/profile';
 import { Title } from 'src/components/Title';
-import { UpdateProfileResponse, UpdateProfileVars } from './connection';
+import { UPDATE_PROFILE, UpdateProfileResponse, UpdateProfileVars } from './connection';
 import s from './ProfileCompletedForm.sass';
 
 export type ProfileCompletedFormProps = {
@@ -20,13 +20,13 @@ export type ProfileCompletedFormProps = {
 export const ProfileCompletedForm = memo<ProfileCompletedFormProps>(({ className }) => {
   const profile = useSelector(profileSelectors.get);
   const { t } = useTranslation();
-  const [update, { loading }] = useMutation<UpdateProfileResponse, UpdateProfileVars>('/profile');
+  const [update, { loading }] = useMutation<UpdateProfileResponse, UpdateProfileVars>(UPDATE_PROFILE);
 
   const { onSubmit, validate, initialValues } = useMemo<
     Pick<FormikConfig<ProfileFormValues>, 'onSubmit' | 'validate' | 'initialValues'>
   >(() => {
     const { catcherValidator } = createErrorHandlers<keyof ProfileFormValues>(
-      (code, error) => {
+      (code, _, error) => {
         if (code === null) {
           message.error(t(`errors.${error.message}`));
         } else {
@@ -42,7 +42,7 @@ export const ProfileCompletedForm = memo<ProfileCompletedFormProps>(({ className
         name: profile?.name,
       },
       onSubmit: (values, { setErrors }) => {
-        update({ variables: { name: values.name?.trim() } })
+        update({ variables: { input: { name: values.name } } })
           .then(() => message.success(t(`screens.ProfileScreen.updateProfile.success`)))
           .catch(catcherValidator({ setErrors, getMessage: (code) => t(`errors.${code}`) }));
       },

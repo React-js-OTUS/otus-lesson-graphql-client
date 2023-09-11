@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 import cn from 'clsx';
-import { useMutation } from 'src/client/hooks';
+import { useMutation } from '@apollo/client';
 import { FormikConfig, useFormik } from 'formik';
 import { Button, message } from 'antd';
 import { useDispatch } from 'react-redux';
@@ -11,7 +11,7 @@ import { isLongEnough, isNotDefinedString } from 'src/utils/validation';
 import { tokenActions } from 'src/store/token';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { NavigationState } from 'src/navigation/types';
-import { SignUpResponse, SignUpVars, extractSignUp } from '../connections';
+import { SIGN_UP, SignUpResponse, SignUpVars, extractSignUp } from '../connections';
 import s from './SingUpBlock.sass';
 
 export type SingUpBlockProps = {
@@ -25,13 +25,13 @@ const initialValues: AuthFormValues = {
 
 export const SingUpBlock = memo<SingUpBlockProps>(({ className }) => {
   const { t } = useTranslation();
-  const [signUp, { loading }] = useMutation<SignUpResponse, SignUpVars>('/signup');
+  const [signUp, { loading }] = useMutation<SignUpResponse, SignUpVars>(SIGN_UP, { fetchPolicy: 'no-cache' });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const { onSubmit, validate } = useMemo<Pick<FormikConfig<AuthFormValues>, 'onSubmit' | 'validate'>>(() => {
-    const { catcher } = createErrorHandlers((code, error) => {
+    const { catcher } = createErrorHandlers((code, _, error) => {
       if (code === null) {
         message.error(t(`errors.${error.message}`));
       } else {

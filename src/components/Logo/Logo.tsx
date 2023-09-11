@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { Link } from 'react-router-dom';
-import logo from './logo.svg';
+import Img from './logo.svg';
 import s from './Logo.sass';
 
 export type LogoProps = {
@@ -10,7 +10,8 @@ export type LogoProps = {
 
 export const Logo = memo<LogoProps>(({ className }) => (
   <Link to="/" className={cn(s.root, className)}>
-    <img src={logo} alt="logo" className={s.img} />
+    {/* <img src={logo} alt="logo" className={s.img} /> */}
+    <Img className={s.img} />
   </Link>
 ));
 

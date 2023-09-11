@@ -1,0 +1,58 @@
+# This file was generated. Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type AuthResult {
+    token: String!
+}
+
+type Mutation {
+    profile: ProfileMutations
+}
+
+type Profile {
+    email: String!
+    id: ID!
+    name: String!
+    signUpDate: Date!
+}
+
+type ProfileMutations {
+    password: ProfilePasswordMutations
+    signin(email: String!, password: String!): AuthResult!
+    signup(email: String!, password: String!): AuthResult!
+    update(input: UpdateProfileInput!): Profile!
+}
+
+type ProfilePasswordMutations {
+    change(input: ChangePasswordInput!): ResetPassword!
+}
+
+type Query {
+    profile: Profile
+}
+
+type ResetPassword {
+    success: Boolean!
+}
+
+type User {
+    id: ID!
+    name: String!
+    signUpDate: Date!
+}
+
+"Date as iso string"
+scalar Date
+
+input ChangePasswordInput {
+    newPassword: String!
+    password: String!
+}
+
+input UpdateProfileInput {
+    name: String
+}

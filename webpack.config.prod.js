@@ -41,8 +41,9 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
       },
       {
-        test: /\.svg/,
-        type: 'asset/inline',
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
       },
       {
         test: /\.s[ac]ss$/i,

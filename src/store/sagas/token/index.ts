@@ -1,11 +1,10 @@
 import { put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import { FetchResult } from '@apollo/client';
 import { storage } from 'src/utils/storage';
-import { projectFetch } from 'src/client/projectFetch';
-import { Profile } from 'src/server.types';
-import { message } from 'antd';
-import i18n from 'i18next';
+import { client } from 'src/client';
 import { TOKEN_KEY, tokenActions, tokenSelectors } from '../../token';
 import { profileActions } from '../../profile';
+import { GET_PROFILE, extractGetProfile, GetProfileResponse } from './connections';
 import { TokenChannel } from './TokenChannel';
 
 const tokenChannel = new TokenChannel('token-saver-channel');
@@ -15,21 +14,8 @@ export function* setToken(): Generator {
   tokenChannel.setToken(token);
   if (token) {
     storage.set(TOKEN_KEY, token);
-    try {
-      const profile = (yield projectFetch('/profile', {
-        headers: { 'Content-Type': 'application/json', authorization: token },
-      })) as Profile;
-      yield put(profileActions.set(profile));
-    } catch (e) {
-      if ('code' in e) {
-        message.error(i18n.t(`errors.${e.code}`));
-        if (e.code === 'ERR_TOKEN_REQUIRED_ERROR' || e.code === 'ERR_USER_NOT_REGISTER') {
-          yield put(tokenActions.logout());
-        }
-      } else {
-        message.error(e.message);
-      }
-    }
+    const { data: res } = (yield client.query({ query: GET_PROFILE })) as FetchResult<GetProfileResponse>;
+    yield put(profileActions.set(extractGetProfile(res)));
   }
 }
 export function* clearToken() {

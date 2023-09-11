@@ -5,7 +5,7 @@ const { ContextReplacementPlugin, DefinePlugin } = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const port = 2034;
+const port = 2035;
 const dist = path.join(__dirname, 'dist');
 const src = path.join(__dirname, 'src');
 const host = 'localhost';
@@ -50,8 +50,9 @@ module.exports = {
         ],
       },
       {
-        test: /\.svg/,
-        type: 'asset/inline'
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
       },
       {
         test: /\.s[ac]ss$/i,
