@@ -1,7 +1,7 @@
+import { feedbackDev } from 'src/utils/feedback';
 import { Position, Sizes, Type } from './types';
 import { getLimitSize } from './helpers';
 import { getPercent } from '../helpers';
-import { feedbackDev } from '../../utils/feedback';
 
 export type MoveData = {
   startWidth: number;

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import cn from 'clsx';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { useThemeContext, Theme } from '../../theming';
+import { useThemeContext, Theme } from 'src/theming';
 import s from './ThemeSwitcher.sass';
 
 export type ThemeSwitcherProps = {

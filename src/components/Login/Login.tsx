@@ -4,8 +4,8 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RootState } from '../../store';
-import { tokenSelectors, tokenActions } from '../../store/token';
+import { RootState } from 'src/store';
+import { tokenSelectors, tokenActions } from 'src/store/token';
 import s from './Login.sass';
 
 export type LoginProps = {

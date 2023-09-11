@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import cn from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { Locale } from '../../localization';
+import { Locale } from 'src/localization';
 import s from './LangSwitcher.sass';
 
 export type ThemeSwitcherProps = {

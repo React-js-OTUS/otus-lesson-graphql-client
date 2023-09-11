@@ -10,7 +10,7 @@
     "build": "webpack --mode production -c webpack.config.prod.js",
     "test": "jest src",
     "lint": "eslint src --fix",
-    "schemagen": "graphql-codegen && node src/client/possibleTypesGen.js"
+    "schemagen": "graphql-codegen && ts-node enhance.server.types.ts && node src/client/possibleTypesGen.js"
   },
   "keywords": [],
   "license": "MIT",
@@ -67,6 +67,7 @@
     "style-loader": "^3.3.3",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
+    "ts-node": "^10.9.1",
     "typescript-loader": "^0.0.0",
     "webpack": "^5.85.0",
     "webpack-cli": "^5.1.3",

@@ -1,4 +1,4 @@
-import { store } from '../../index';
+import { store } from 'src/store';
 import { tokenActions } from '../../token';
 
 type TokenChannelMessageInit = {

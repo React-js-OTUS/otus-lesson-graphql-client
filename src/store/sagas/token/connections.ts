@@ -6,7 +6,6 @@ export type GetProfileResponse = Pick<Query, 'profile'>;
 export const GET_PROFILE = gql`
   query getProfile {
     profile {
-      about
       email
       id
       name

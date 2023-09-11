@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import cn from 'clsx';
 import { useDidUpdate } from 'src/hooks/useDidUpdate';
-import { getRandomId } from '../../../utils/random';
+import { getRandomId } from 'src/utils/random';
 import { ItemInputProps, ListInputProps, State, ListInputRef } from './type';
 import s from './createListInput.sass';
 
