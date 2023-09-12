@@ -27,7 +27,7 @@ export const getErrorExtensions = (error: ErrorResponse): Extensions[] => {
 
 export const errorLink = onError((error: ErrorResponse) => {
   const extensions = getErrorExtensions(error);
-  if (extensions?.find((i) => i.code === NOT_AUTHORIZED_CODE)) {
+  if (extensions?.find((i) => i?.code === NOT_AUTHORIZED_CODE)) {
     store.dispatch(tokenActions.logout());
   }
 });
