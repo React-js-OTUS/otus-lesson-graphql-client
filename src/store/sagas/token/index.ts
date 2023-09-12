@@ -4,7 +4,11 @@ import { storage } from 'src/utils/storage';
 import { client } from 'src/client';
 import { TOKEN_KEY, tokenActions, tokenSelectors } from '../../token';
 import { profileActions } from '../../profile';
-import { GET_PROFILE, extractGetProfile, GetProfileResponse } from './connections';
+import { animalsActions } from '../../animals';
+import { usersActions } from '../../users';
+import { medicinesActions } from '../../medicines';
+import { diseasesActions } from '../../diseases';
+import { GET_INITIAL_DATA, GetProfileResponse } from './connections';
 import { TokenChannel } from './TokenChannel';
 
 const tokenChannel = new TokenChannel('token-saver-channel');
@@ -14,8 +18,12 @@ export function* setToken(): Generator {
   tokenChannel.setToken(token);
   if (token) {
     storage.set(TOKEN_KEY, token);
-    const { data: res } = (yield client.query({ query: GET_PROFILE })) as FetchResult<GetProfileResponse>;
-    yield put(profileActions.set(extractGetProfile(res)));
+    const { data: res } = (yield client.query({ query: GET_INITIAL_DATA })) as FetchResult<GetProfileResponse>;
+    yield put(profileActions.set(res.profile));
+    yield put(animalsActions.set(res.animals));
+    yield put(usersActions.set(res.users));
+    yield put(medicinesActions.set(res.medicines));
+    yield put(diseasesActions.set(res.diseases));
   }
 }
 export function* clearToken() {
