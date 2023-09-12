@@ -11,6 +11,23 @@ export type ErrorHandlers<Err extends Record<string, unknown> = Record<string, u
 
 export type ValidatorSchema<K extends string> = Partial<Record<K, string[]>>;
 
+export const mapApolloError =
+  (action: (err: GraphQLError, error: ApolloError) => void) =>
+  (error: ApolloError): boolean => {
+    if (
+      'networkError' in error &&
+      'result' in error.networkError &&
+      error.networkError.result &&
+      typeof error.networkError.result === 'object' &&
+      'errors' in error.networkError.result &&
+      Array.isArray(error.networkError.result.errors)
+    ) {
+      error.networkError.result.errors.forEach((err) => action(err, error));
+      return true;
+    }
+    return false;
+  };
+
 export const createErrorHandlers = <
   Keys extends string = string,
   Err extends Record<string, unknown> = Record<string, unknown>
@@ -19,28 +36,24 @@ export const createErrorHandlers = <
   validatorSchema?: ValidatorSchema<Keys>
 ): ErrorHandlers<Err> => ({
   catcher: (error) => {
-    if ('graphQLErrors' in error && Array.isArray(error.graphQLErrors) && error.graphQLErrors.length) {
-      error.graphQLErrors.forEach((err) => {
-        handle(err.extensions.code as string, err, error);
-      });
-    } else {
+    const handled = mapApolloError((err) => {
+      handle(err.extensions.code as string, err, error);
+    })(error);
+    if (!handled) {
       handle(null, null, error);
     }
   },
   catcherValidator: ({ setErrors, getMessage }) => {
     const keys = Object.keys(validatorSchema || {}) as Keys[];
-    return (error) => {
-      if ('graphQLErrors' in error && Array.isArray(error.graphQLErrors)) {
-        error.graphQLErrors.forEach((err) => {
-          const index = keys.findIndex((key) => validatorSchema[key].includes(err.extensions.code));
-          if (index !== -1) {
-            const key = keys[index];
-            setErrors({ [key]: getMessage(err.extensions.code as string, err, error) } as Err);
-          } else {
-            handle(err.extensions.code as string, err, error);
-          }
-        });
+    return mapApolloError((err, error) => {
+      const code = err.extensions.code as string;
+      const index = keys.findIndex((key) => validatorSchema[key].includes(code));
+      if (index !== -1) {
+        const key = keys[index];
+        setErrors({ [key]: getMessage(code, err, error) } as Err);
+      } else {
+        handle(code, err, error);
       }
-    };
+    });
   },
 });
