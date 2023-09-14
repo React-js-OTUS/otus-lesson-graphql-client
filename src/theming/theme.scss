@@ -13,14 +13,15 @@ $light: (
   inverseText: #f6f7f9,
   text: #404757,
   lightText: #5f697e,
-  redLight: #E9B6B4,
-  red: #E97973,
-  greenLight: #AFE3B6,
-  green: #70E37E,
+  mainRedLight: #E9B6B4,
+  mainRed: #E97973,
+  mainGreenLight: #AFE3B6,
+  mainGreen: #70E37E,
   accentLight: #F7D9B6,
   accent: #DB831C,
   accent2Light: #ADD1E5,
-  accent2: #18638B
+  accent2: #18638B,
+  boxShadowError: 0 0 16px rgba(#ec5f57, 0.05)
 );
 
 // Переменные для темной темы
@@ -38,12 +39,13 @@ $dark: (
   inverseText: #23272f,
   text: #f6f7f9,
   lightText: #ebecf0,
-  redLight: #5B0B07,
-  red: #8A1A14,
-  greenLight: #05460D,
-  green: #0F6B1A,
+  mainRedLight: #5B0B07,
+  mainRed: #8A1A14,
+  mainGreenLight: #05460D,
+  mainGreen: #0F6B1A,
   accentLight: #C5AB8B,
   accent: #8A5213,
   accent2Light: #7C9BAC,
-  accent2: #0F4057
+  accent2: #0F4057,
+  boxShadowError: 0 0 16px rgba(#ec5f57, 0.05)
 );

@@ -129,6 +129,9 @@ export const resources = {
           healthy: 'Healthy',
           empty: 'Пусто',
         },
+        AnimalTypeSelect: {
+          placeholder: 'Choose the type of animal',
+        },
         RemoveButton: {
           title: 'Data will be lost, delete?',
           ok: 'Remove',
@@ -174,6 +177,11 @@ export const resources = {
           babel: 'Babel + typescript',
           socketsAndWorkers: 'Web sockets & Web workers',
           graphql: 'Graphql',
+        },
+        AnimalType: {
+          Cat: 'cat',
+          Dog: 'dog',
+          Bird: 'bird',
         },
       },
     },
@@ -305,6 +313,9 @@ export const resources = {
           healthy: 'Здоровые',
           empty: 'Пусто',
         },
+        AnimalTypeSelect: {
+          placeholder: 'Выберите тип животного',
+        },
         RemoveButton: {
           title: 'Данные будут потеряны, удалить?',
           ok: 'Удалить',
@@ -350,6 +361,11 @@ export const resources = {
           babel: 'Babel + typescript',
           socketsAndWorkers: 'Web sockets & Web workers',
           graphql: 'Graphql',
+        },
+        AnimalType: {
+          Cat: 'Код',
+          Dog: 'Пёс',
+          Bird: 'Птица',
         },
       },
     },

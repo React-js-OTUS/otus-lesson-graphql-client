@@ -1,0 +1,20 @@
+@import src/styles/common
+
+.root
+  width: 100%
+
+  &.error :global(.ant-select-selector)
+    +theme(border-color, mainRed)
+    +theme(box-shadow, boxShadowError)
+
+.tag
+  display: flex
+  align-items: center
+  gap: 8px
+  height: 22px
+  overflow: hidden
+  font-size: 14px
+
+  &.inactive
+    font-size: 12px
+    +theme(color, lightText)
