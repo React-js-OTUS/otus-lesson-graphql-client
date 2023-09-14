@@ -2,8 +2,6 @@
 // (tip move them in a JSON file and import them,
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 
-import { ManagePanel } from 'src/components/ManagePanel';
-
 export const resources = {
   en: {
     translation: {
@@ -129,6 +127,7 @@ export const resources = {
           convalescents: 'Convalescents',
           doctors: 'Doctors',
           healthy: 'Healthy',
+          empty: 'Пусто',
         },
         RemoveButton: {
           title: 'Data will be lost, delete?',
@@ -304,6 +303,7 @@ export const resources = {
           convalescents: 'Выздоравливающие',
           doctors: 'Доктора',
           healthy: 'Здоровые',
+          empty: 'Пусто',
         },
         RemoveButton: {
           title: 'Данные будут потеряны, удалить?',

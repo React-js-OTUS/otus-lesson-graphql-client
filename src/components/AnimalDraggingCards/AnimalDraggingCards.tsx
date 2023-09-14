@@ -8,12 +8,11 @@ export type AnimalDraggingCardsProps = {
   className?: string;
   value: Animal[];
   dndName: string;
+  empty?: React.ReactNode;
 };
 
-export const AnimalDraggingCards: FC<AnimalDraggingCardsProps> = ({ className, dndName, value }) => (
+export const AnimalDraggingCards: FC<AnimalDraggingCardsProps> = ({ className, dndName, empty, value }) => (
   <div className={cn(s.root, className)}>
-    {value?.map((item) => (
-      <AnimalDraggingCard dndName={dndName} value={item} key={item.id} />
-    ))}
+    {value?.length ? value.map((item) => <AnimalDraggingCard dndName={dndName} value={item} key={item.id} />) : empty}
   </div>
 );
