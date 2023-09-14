@@ -1,72 +1,30 @@
 import { gql } from '@apollo/client';
 import { Query } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
+import { ANIMAL_FRAGMENT, DISEASE_FRAGMENT, MEDICINE_FRAGMENT, PROFILE_FRAGMENT, USER_FRAGMENT } from 'src/connection';
 
 export type GetProfileResponse = Pick<Query, 'profile' | 'animals' | 'diseases' | 'medicines' | 'users'>;
 export const GET_INITIAL_DATA = gql`
   query getInitialData {
     profile {
-      email
-      id
-      name
-      signUpDate
+      ...Profile
     }
     users {
-      id
-      name
+      ...User
     }
     medicines {
-      id
-      name
-      heal
+      ...Medicine
     }
     diseases {
-      id
-      name
-      type
+      ...Disease
     }
     animals {
-      ... on Cat {
-        age
-        comment
-        diseases {
-          id
-        }
-        doctor {
-          id
-        }
-        id
-        name
-        updatedAt
-      }
-      ... on Dog {
-        age
-        comment
-        diseases {
-          id
-        }
-        doctor {
-          id
-        }
-        id
-        name
-        updatedAt
-      }
-      ... on Bird {
-        age
-        comment
-        diseases {
-          id
-        }
-        doctor {
-          id
-        }
-        id
-        name
-        updatedAt
-      }
+      ...Animal
     }
   }
+  ${USER_FRAGMENT}
+  ${PROFILE_FRAGMENT}
+  ${ANIMAL_FRAGMENT}
+  ${MEDICINE_FRAGMENT}
+  ${DISEASE_FRAGMENT}
 `;
-
-export const extractGetProfile = (data: GetProfileResponse): Query['profile'] => get('profile', data);

@@ -19,7 +19,7 @@ export type SingInBlockProps = {
 };
 
 const initialValues: AuthFormValues = {
-  email: undefined,
+  nickname: undefined,
   password: undefined,
 };
 
@@ -40,7 +40,7 @@ export const SingInBlock = memo<SingInBlockProps>(({ className }) => {
     });
     return {
       onSubmit: (values, { resetForm }) => {
-        signIn({ variables: { email: values.email, password: values.password } })
+        signIn({ variables: { nickname: values.nickname, password: values.password } })
           .then((res) => {
             dispatch(tokenActions.set(extractSignIn(res.data)));
             resetForm();
@@ -50,8 +50,8 @@ export const SingInBlock = memo<SingInBlockProps>(({ className }) => {
       },
       validate: (values) => {
         const errors = {} as AuthFormErrors;
-        if (isNotDefinedString(values.email)) {
-          errors.email = t(`errors.is_required`);
+        if (isNotDefinedString(values.nickname)) {
+          errors.nickname = t(`errors.is_required`);
         }
         if (isNotDefinedString(values.password)) {
           errors.password = t(`errors.is_required`);

@@ -34,22 +34,22 @@ export const ProfileCompletedForm = memo<ProfileCompletedFormProps>(({ className
         }
       },
       {
-        name: ['ERR_INVALID_NICKNAME'],
+        nickname: ['ERR_INVALID_NICKNAME'],
       }
     );
     return {
       initialValues: {
-        name: profile?.name,
+        nickname: profile?.nickname,
       },
       onSubmit: (values, { setErrors }) => {
-        update({ variables: { input: { name: values.name } } })
+        update({ variables: { input: { nickname: values.nickname } } })
           .then(() => message.success(t(`screens.ProfileScreen.updateProfile.success`)))
           .catch(catcherValidator({ setErrors, getMessage: (code) => t(`errors.${code}`) }));
       },
       validate: (values) => {
         const errors = {} as ProfileFormErrors;
-        if (isNotDefinedString(values.name)) {
-          errors.name = t(`errors.is_required`);
+        if (isNotDefinedString(values.nickname)) {
+          errors.nickname = t(`errors.is_required`);
         }
         return errors;
       },
@@ -64,7 +64,7 @@ export const ProfileCompletedForm = memo<ProfileCompletedFormProps>(({ className
   const { submitForm, setValues } = formManager;
 
   useEffect(() => {
-    setValues({ name: profile?.name });
+    setValues({ nickname: profile?.nickname });
   }, [profile, setValues]);
 
   return (

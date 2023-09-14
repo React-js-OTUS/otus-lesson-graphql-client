@@ -14,7 +14,7 @@ export const UserCart: FC<UserCartProps> = ({ className, value, animals }) => {
   if (!value) return null;
   return (
     <div className={cn(s.root, className)}>
-      <div className={s.title}>{value.name || value.id}</div>
+      <div className={s.title}>{value.nickname || value.id}</div>
       <div className={s.body}>
         {animals?.map((item: Animal) => (
           <AnimalCard value={item} key={item.id} />

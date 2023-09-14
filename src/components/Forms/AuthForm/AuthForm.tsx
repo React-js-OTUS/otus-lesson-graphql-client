@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { AuthFormProps } from './types';
 import { PasswordField } from './PasswordField';
-import { EmailField } from './EmailField';
+import { NicknameField } from './NicknameField';
 import s from './AuthForm.sass';
 
 export const AuthForm = memo<AuthFormProps>(({ className, formManager, formElement, autoFocusElement, disabled }) => {
@@ -10,15 +10,15 @@ export const AuthForm = memo<AuthFormProps>(({ className, formManager, formEleme
 
   return (
     <form ref={formElement} onSubmit={handleSubmit} className={cn(s.root, className)}>
-      <EmailField
+      <NicknameField
         onPressEnter={submitForm}
         autoFocusElement={autoFocusElement}
         onBlur={handleBlur}
         onChange={handleChange}
-        value={values.email}
-        errors={errors.email}
+        value={values.nickname}
+        errors={errors.nickname}
         submitCount={submitCount}
-        touched={touched.email}
+        touched={touched.nickname}
         disabled={disabled}
       />
       <PasswordField

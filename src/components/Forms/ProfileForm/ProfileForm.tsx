@@ -14,10 +14,10 @@ export const ProfileForm = memo<ProfileFormProps>(
           autoFocusElement={autoFocusElement}
           onBlur={handleBlur}
           onChange={handleChange}
-          value={values.name}
-          errors={errors.name}
+          value={values.nickname}
+          errors={errors.nickname}
           submitCount={submitCount}
-          touched={touched.name}
+          touched={touched.nickname}
           disabled={disabled}
         />
       </form>

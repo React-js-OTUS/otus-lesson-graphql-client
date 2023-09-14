@@ -2,9 +2,8 @@ import { gql } from '@apollo/client';
 
 export const PROFILE_FRAGMENT = gql`
   fragment Profile on Profile {
-    email
     id
-    name
+    nickname
     signUpDate
   }
 `;
@@ -12,7 +11,7 @@ export const PROFILE_FRAGMENT = gql`
 export const USER_FRAGMENT = gql`
   fragment User on User {
     id
-    name
+    nickname
     signUpDate
   }
 `;

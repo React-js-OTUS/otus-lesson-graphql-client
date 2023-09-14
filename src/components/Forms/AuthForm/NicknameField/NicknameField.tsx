@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { AuthFormProps } from 'src/components/Forms/AuthForm';
 import { FormItem } from 'src/components/FormItem';
 import { getValidates } from 'src/utils/validation';
-import s from './EmailField.sass';
+import s from './NicknameField.sass';
 
 export type EmailFieldProps = Pick<AuthFormProps, 'className' | 'disabled' | 'autoFocusElement'> & {
   submitCount: number;
@@ -21,7 +21,7 @@ export type EmailFieldProps = Pick<AuthFormProps, 'className' | 'disabled' | 'au
 
 const prefix = <UserOutlined />;
 
-export const EmailField = memo<EmailFieldProps>(
+export const NicknameField = memo<EmailFieldProps>(
   ({ className, onChange, onBlur, onPressEnter, autoFocusElement, touched, value, errors, disabled, submitCount }) => {
     const { t } = useTranslation();
 
@@ -30,7 +30,7 @@ export const EmailField = memo<EmailFieldProps>(
     return (
       <FormItem
         className={cn(s.root, className)}
-        title={t(`forms.AuthForm.email.title`)}
+        title={t(`forms.AuthForm.nickname.title`)}
         required
         validateStatus={validateStatus}
         help={help}
@@ -42,16 +42,15 @@ export const EmailField = memo<EmailFieldProps>(
           onPressEnter={onPressEnter}
           data-cy="input"
           autoFocus
-          type="email"
-          name="email"
+          name="nickname"
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          placeholder={t(`forms.AuthForm.email.placeholder`)}
+          placeholder={t(`forms.AuthForm.nickname.placeholder`)}
         />
       </FormItem>
     );
   }
 );
 
-EmailField.displayName = 'EmailField';
+NicknameField.displayName = 'EmailField';

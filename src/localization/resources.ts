@@ -69,9 +69,9 @@ export const resources = {
       },
       forms: {
         AuthForm: {
-          email: {
-            title: 'Email',
-            placeholder: 'Enter email',
+          nickname: {
+            title: 'Nickname',
+            placeholder: 'Enter Nickname',
           },
           password: {
             title: 'Password',
@@ -246,9 +246,9 @@ export const resources = {
       },
       forms: {
         AuthForm: {
-          email: {
-            title: 'Email',
-            placeholder: 'Укажите email',
+          nickname: {
+            title: 'Никнэйм',
+            placeholder: 'Укажите никнэйм',
           },
           password: {
             title: 'Пароль',

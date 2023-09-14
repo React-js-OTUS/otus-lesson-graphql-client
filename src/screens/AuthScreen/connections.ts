@@ -5,9 +5,9 @@ import { get } from 'src/utils/unchanged';
 export type SignInVars = ProfileMutationsSigninArgs;
 export type SignInResponse = Pick<Mutation, 'profile'>;
 export const SIGN_IN = gql`
-  mutation signIn($email: String!, $password: String!) {
+  mutation signIn($nickname: String!, $password: String!) {
     profile {
-      signin(email: $email, password: $password) {
+      signin(nickname: $nickname, password: $password) {
         token
       }
     }
@@ -20,9 +20,9 @@ export const extractSignIn = (data: SignInResponse): Mutation['profile']['signin
 export type SignUpVars = ProfileMutationsSignupArgs;
 export type SignUpResponse = AuthResult;
 export const SIGN_UP = gql`
-  mutation signUp($email: String!, $password: String!) {
+  mutation signUp($nickname: String!, $password: String!) {
     profile {
-      signup(email: $email, password: $password) {
+      signup(nickname: $nickname, password: $password) {
         token
       }
     }
