@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { FormItem } from 'src/components/FormItem';
 import { getValidates } from 'src/utils/validation';
 import { ProfileFormProps } from '../types';
-import s from './NameField.sass';
+import s from './NicknameField.sass';
 
 export type NameFieldProps = Pick<ProfileFormProps, 'className' | 'disabled' | 'autoFocusElement'> & {
   submitCount: number;
@@ -20,7 +20,7 @@ export type NameFieldProps = Pick<ProfileFormProps, 'className' | 'disabled' | '
 
 const prefix = <UserOutlined />;
 
-export const NameField = memo<NameFieldProps>(
+export const NicknameField = memo<NameFieldProps>(
   ({ className, onChange, onBlur, autoFocusElement, touched, value, errors, disabled, submitCount }) => {
     const { t } = useTranslation();
 
@@ -29,7 +29,7 @@ export const NameField = memo<NameFieldProps>(
     return (
       <FormItem
         className={cn(s.root, className)}
-        title={t(`forms.ProfileForm.name.title`)}
+        title={t(`forms.ProfileForm.nickname.title`)}
         required
         validateStatus={validateStatus}
         help={help}
@@ -40,15 +40,15 @@ export const NameField = memo<NameFieldProps>(
           ref={autoFocusElement}
           data-cy="input"
           autoFocus
-          name="name"
+          name="nickname"
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          placeholder={t(`forms.ProfileForm.name.placeholder`)}
+          placeholder={t(`forms.ProfileForm.nickname.placeholder`)}
         />
       </FormItem>
     );
   }
 );
 
-NameField.displayName = 'NameField';
+NicknameField.displayName = 'NameField';

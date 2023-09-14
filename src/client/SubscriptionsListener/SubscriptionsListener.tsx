@@ -34,6 +34,7 @@ export const SubscriptionsListener: FC = () => {
   const animalRemoveSub = useSubscription(SUB_REMOVE_ANIMAL);
   const diseaseRemoveSub = useSubscription(SUB_REMOVE_DISEASE);
   const medicineRemoveSub = useSubscription(SUB_REMOVE_MEDICINE);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

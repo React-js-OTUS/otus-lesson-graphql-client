@@ -16,6 +16,7 @@ export const mapApolloError =
   (error: ApolloError): boolean => {
     if (
       'networkError' in error &&
+      error.networkError &&
       'result' in error.networkError &&
       error.networkError.result &&
       typeof error.networkError.result === 'object' &&
@@ -23,6 +24,10 @@ export const mapApolloError =
       Array.isArray(error.networkError.result.errors)
     ) {
       error.networkError.result.errors.forEach((err) => action(err, error));
+      return true;
+    }
+    if ('graphQLErrors' in error) {
+      error.graphQLErrors.forEach((err) => action(err, error));
       return true;
     }
     return false;

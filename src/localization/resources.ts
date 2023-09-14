@@ -12,6 +12,7 @@ export const resources = {
         invalid_email_address: 'Invalid email address',
         too_short_password: 'The password is too short',
         not_same_password: "Passwords don't match",
+        ERR_DUPLICATE_VALUE_OF_FIELD: 'There is already a user with this nickname',
         ERR_INCORRECT_EMAIL_OR_PASSWORD: 'Incorrect password or email',
         ERR_NOT_FOUND: 'An entity with this id was not found',
         ERR_USER_NOT_REGISTER: 'Register to access this feature',
@@ -99,7 +100,7 @@ export const resources = {
           },
         },
         ProfileForm: {
-          name: {
+          nickname: {
             title: 'Nickname',
             placeholder: 'Come up with a pseudonym for yourself',
           },
@@ -189,6 +190,7 @@ export const resources = {
         invalid_email_address: 'Некорректный email адрес',
         too_short_password: 'Слишком короткий пароль',
         not_same_password: 'Пароли не совпадают',
+        ERR_DUPLICATE_VALUE_OF_FIELD: 'Уже есть пользователь с таким ником',
         ERR_INCORRECT_EMAIL_OR_PASSWORD: 'Некорректный пароль или email',
         ERR_NOT_FOUND: 'Сущность с таким id не найдена',
         ERR_USER_NOT_REGISTER: 'Зарегистрируйтесь, чтобы получить доступ к этой функции',
@@ -276,7 +278,7 @@ export const resources = {
           },
         },
         ProfileForm: {
-          name: {
+          nickname: {
             title: 'Псевдоним',
             placeholder: 'Придумайте себе псевдоним',
           },

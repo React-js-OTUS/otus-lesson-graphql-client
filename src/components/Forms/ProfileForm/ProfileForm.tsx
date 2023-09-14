@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { ProfileFormProps } from './types';
-import { NameField } from './NameField';
+import { NicknameField } from './NicknameField';
 import s from './ProfileForm.sass';
 
 export const ProfileForm = memo<ProfileFormProps>(
@@ -10,7 +10,7 @@ export const ProfileForm = memo<ProfileFormProps>(
 
     return (
       <form ref={formElement} onSubmit={handleSubmit} className={cn(s.root, className)}>
-        <NameField
+        <NicknameField
           autoFocusElement={autoFocusElement}
           onBlur={handleBlur}
           onChange={handleChange}
