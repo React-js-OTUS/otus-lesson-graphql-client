@@ -30,6 +30,10 @@ export function* clearToken() {
   storage.remove(TOKEN_KEY);
   tokenChannel.setToken(null);
   yield put(profileActions.set(null));
+  yield put(animalsActions.set(null));
+  yield put(usersActions.set(null));
+  yield put(medicinesActions.set(null));
+  yield put(diseasesActions.set(null));
 }
 
 export function* getToken() {
