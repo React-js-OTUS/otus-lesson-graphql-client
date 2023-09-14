@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import { Mutation, ProfileMutationsUpdateArgs } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
-import { PROFILE } from 'src/connection';
+import { PROFILE_FRAGMENT } from 'src/connection';
 
 export type UpdateProfileVars = ProfileMutationsUpdateArgs;
 export type UpdateProfileResponse = Pick<Mutation, 'profile'>;
@@ -13,7 +13,7 @@ export const UPDATE_PROFILE = gql`
       }
     }
   }
-  ${PROFILE}
+  ${PROFILE_FRAGMENT}
 `;
 
 export const extractUpdateProfile = (data: UpdateProfileResponse): Mutation['profile']['update'] =>

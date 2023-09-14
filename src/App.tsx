@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './localization';
-import { ClientProvider } from 'src/client';
+import { ClientProvider, SubscriptionsListener } from 'src/client';
 import { LocalizationInitiator } from './localization/LocalizationInitiator';
 import { Navigation } from './navigation/Navigation';
 import { store } from './store';
@@ -18,6 +18,7 @@ function App() {
         <Provider store={store}>
           <Head />
           <Initializer />
+          <SubscriptionsListener />
           <LocalizationInitiator />
           <ThemeProvider>
             <Layout>

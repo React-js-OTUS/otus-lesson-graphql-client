@@ -5,13 +5,35 @@ import { RootState } from './index';
 
 export const diseasesSlice = createSlice<
   Disease[],
-  { set: CaseReducer<Disease[], PayloadAction<Disease[]>> },
+  {
+    set: CaseReducer<Disease[], PayloadAction<Disease[]>>;
+    update: CaseReducer<Disease[], PayloadAction<Disease>>;
+    remove: CaseReducer<Disease[], PayloadAction<Disease>>;
+  },
   'diseases'
 >({
   name: 'diseases',
   initialState: null,
   reducers: {
     set: (_, action: PayloadAction<Disease[]>) => action.payload,
+    update: (items, action) => {
+      if (!items || !action.payload) return;
+      const item = action.payload;
+      const index = items.findIndex((i) => i.id === item.id);
+      if (index > -1) {
+        items[index] = item;
+      } else {
+        items.push(item);
+      }
+    },
+    remove: (items, action) => {
+      if (!items || !action.payload) return;
+      const item = action.payload;
+      const index = items.findIndex((i) => i.id === item.id);
+      if (index > -1) {
+        items.splice(index, 1);
+      }
+    },
   },
 });
 
