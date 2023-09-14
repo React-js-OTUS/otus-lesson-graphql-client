@@ -1,18 +1,29 @@
 import React, { FC, useState } from 'react';
-import { Select } from 'antd';
+import { Select, SelectProps } from 'antd';
 import cn from 'clsx';
 import { Disease } from 'src/server.types';
 import { TextSelection } from 'src/components/TextSelection';
 import s from './DiseasesSelect.sass';
 
-export type DiseasesSelectProps = {
+export type DiseasesSelectProps = SelectProps & {
   className?: string;
   items: Disease[];
-  value: Disease[];
-  onChange: (value: Disease[]) => void;
+  value: Disease['id'][];
+  onBlur?: SelectProps['onBlur'];
+  disabled?: SelectProps['disabled'];
+  placeholder?: SelectProps['placeholder'];
+  onChange: (value: Disease['id'][]) => void;
 };
 
-export const DiseasesSelect: FC<DiseasesSelectProps> = ({ className, items, value, onChange }) => {
+export const DiseasesSelect: FC<DiseasesSelectProps> = ({
+  className,
+  disabled,
+  placeholder,
+  onBlur,
+  items,
+  value,
+  onChange,
+}) => {
   const [search, onSearch] = useState<string>();
 
   const filterOption = (input: string, option: { title: string; value: string }) =>
@@ -20,10 +31,13 @@ export const DiseasesSelect: FC<DiseasesSelectProps> = ({ className, items, valu
 
   return (
     <Select
+      onBlur={onBlur}
+      disabled={disabled}
       mode="multiple"
       className={cn(s.root, className)}
       filterOption={filterOption}
       value={value}
+      placeholder={placeholder}
       onChange={onChange}
       onSearch={onSearch}
     >

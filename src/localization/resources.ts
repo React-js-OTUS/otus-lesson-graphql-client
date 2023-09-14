@@ -98,6 +98,28 @@ export const resources = {
             placeholder: 'Enter email',
           },
         },
+        AnimalForm: {
+          name: {
+            title: 'Name',
+            placeholder: 'Enter name',
+          },
+          comment: {
+            title: 'Comment',
+            placeholder: 'Enter comment',
+          },
+          type: {
+            title: 'Type',
+            placeholder: 'Enter type',
+          },
+          age: {
+            title: 'Age',
+            placeholder: 'Enter age',
+          },
+          diseases: {
+            title: 'Diseases',
+            placeholder: 'Enter diseases',
+          },
+        },
         ProfileForm: {
           nickname: {
             title: 'Nickname',
@@ -280,6 +302,28 @@ export const resources = {
           email: {
             title: 'Email',
             placeholder: 'Укажите email',
+          },
+        },
+        AnimalForm: {
+          name: {
+            title: 'Имя',
+            placeholder: 'Укажите имя',
+          },
+          comment: {
+            title: 'Комментарий',
+            placeholder: 'Укажите комментарий',
+          },
+          type: {
+            title: 'Тип',
+            placeholder: 'Укажите тип',
+          },
+          age: {
+            title: 'Возраст',
+            placeholder: 'Укажите возраст',
+          },
+          diseases: {
+            title: 'Заболевания',
+            placeholder: 'Укажите заболевания',
           },
         },
         ProfileForm: {
