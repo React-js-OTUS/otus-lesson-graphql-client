@@ -2,6 +2,8 @@
 // (tip move them in a JSON file and import them,
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 
+import { ManagePanel } from 'src/components/ManagePanel';
+
 export const resources = {
   en: {
     translation: {
@@ -60,8 +62,7 @@ export const resources = {
           },
         },
         HomeScreen: {
-          title: 'Home',
-          desc: `Welcome to the react course from otus!\n\nThis is a training project of the course. Here you will find materials for lectures, homework, as well as examples of some complex components.\n\nThe project is written in **typescript**, **redux**, **redux-saga** using **webpack**. In it , you can spy on the implementation of the dark/light theme, locale switching, navigation, token exchange between browser tabs.\n\nThe project also has its own server implemented on **graphql**, **apollo**, **express** and using a json file as a database (in real development, do not do this, it's just to save you from installing the database). Interaction with the server is implemented, namely the ability to register a user, log in to an account, but do not forget to start the server locally - use the _start:client_ and _start:server_ commands.\n\nWelcome and good luck in learning!`,
+          title: 'Manage panel',
         },
         TeachersScreen: {
           title: 'Teachers',
@@ -124,8 +125,10 @@ export const resources = {
         string: 'String value',
       },
       components: {
-        Messenger: {
-          empty: 'There are no users to communicate with',
+        ManagePanel: {
+          convalescents: 'Convalescents',
+          doctors: 'Doctors',
+          healthy: 'Healthy',
         },
         RemoveButton: {
           title: 'Data will be lost, delete?',
@@ -153,12 +156,8 @@ export const resources = {
         },
         header: {
           nav: 'Navigation',
-          root: 'Home',
+          root: 'Manage panel',
           profile: 'Profile',
-          'home-works': 'Home works',
-          examples: 'Examples',
-          lessons: 'Lessons',
-          teachers: 'Teachers',
         },
       },
       enums: {
@@ -238,8 +237,7 @@ export const resources = {
           },
         },
         HomeScreen: {
-          title: 'Главная',
-          desc: `Приветствую на курсе по react от otus!\n\nЭто учебный проект курса. Здесь вы найдете материалы к лекциям, домашние задания, а так же примеры некоторых сложных компонентов.\n\nПроект написан на **typescript**, **redux**, **redux-saga** с использованием **webpack**. В нем можно подсмотреть реализацию темной/светлой темы, переключение локали, навигацию, обмен токен между вкладками браузера.\n\nТак же в проекте есть свой сервер, реализованный на **graphql**, **apollo**, **express** и использующий в качестве базы данных json файл (в реальной разработке не делайте так, это только чтобы избавить вас от установки базы данных). Реализовано взаимодействие с сервером, а именно возможность зарегистрировать пользователя, войти в учетную запись, но не забудьте запустить сервер локально - используйте команды _start:client_ и _start:server_.\n\nДобро пожаловать и удачи в обучении!`,
+          title: 'Панель управления',
         },
         TeachersScreen: {
           title: 'Преподаватели',
@@ -302,8 +300,10 @@ export const resources = {
         string: 'Строковое значение',
       },
       components: {
-        Messenger: {
-          empty: 'Нет пользователей для общения',
+        ManagePanel: {
+          convalescents: 'Выздоравливающие',
+          doctors: 'Доктора',
+          healthy: 'Здоровые',
         },
         RemoveButton: {
           title: 'Данные будут потеряны, удалить?',
@@ -331,12 +331,8 @@ export const resources = {
         },
         header: {
           nav: 'Навигация',
-          root: 'Главная',
+          root: 'Панель управления',
           profile: 'Профиль',
-          'home-works': 'Домашние работы',
-          examples: 'Примеры',
-          lessons: 'Уроки',
-          teachers: 'Преподаватели',
         },
       },
       enums: {
