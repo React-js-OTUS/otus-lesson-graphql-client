@@ -28,11 +28,7 @@ export const animalsSlice = createSlice<
     },
     remove: (items, action) => {
       if (!items || !action.payload) return;
-      const item = action.payload;
-      const index = items.findIndex((i) => i.id === item.id);
-      if (index > -1) {
-        items.splice(index, 1);
-      }
+      return items.filter((i) => i.id !== action.payload.id);
     },
   },
 });
