@@ -42,14 +42,14 @@ export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
     }
   });
   const onTake: UsersPanelProps['onTake'] = (doctor, animal) => {
-    const { id, __typename: type, diseases, ...rest } = animal;
+    const { id, __typename, diseases, ...rest } = animal;
     delete rest.doctor;
     delete rest.updatedAt;
     const diseaseIds = diseases?.map((i) => i.id);
     updateAnimal({
       variables: {
         id,
-        input: { ...rest, diseaseIds, type: type as AnimalType, doctorId: doctor.id },
+        input: { ...rest, diseaseIds, type: __typename as AnimalType, doctorId: doctor.id },
       },
     }).catch(catcher);
   };

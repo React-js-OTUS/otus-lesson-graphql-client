@@ -15,5 +15,5 @@ export const AnimalDraggingCard: FC<AnimalDraggingCardProps> = ({ dndName, class
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   }));
 
-  return <AnimalCard className={cn(s.root, isDragging && s.dragging, className)} {...props} ref={drag} />;
+  return <AnimalCard className={cn(s.root, isDragging && s.isDragging, className)} {...props} ref={drag} />;
 };
