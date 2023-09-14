@@ -1,20 +1,20 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import cn from 'clsx';
 import { Animal } from 'src/server.types';
 import { AnimalIcon } from 'src/components/AnimalIcon';
 import s from './AnimalCard.sass';
 
-export type AnimalCardProps = {
+export type AnimalCardProps = React.HTMLAttributes<HTMLButtonElement> & {
   className?: string;
   value: Animal;
 };
 
-export const AnimalCard: FC<AnimalCardProps> = ({ className, value }) => {
+export const AnimalCard = forwardRef<HTMLButtonElement, AnimalCardProps>(({ className, value, ...props }, ref) => {
   if (!value) return null;
   return (
-    <div className={cn(s.root, className)}>
+    <button ref={ref} {...props} type="button" className={cn(s.root, className)}>
       <AnimalIcon value={value.__typename} />
       <div>{value.name || value.id}</div>
-    </div>
+    </button>
   );
-};
+});

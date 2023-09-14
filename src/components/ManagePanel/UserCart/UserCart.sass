@@ -15,4 +15,12 @@
   width: 600px
   height: 600px
   overflow: auto
+  transition: 0.3s
   +theme(background-color, bg)
+
+  &.isOver
+    +theme(background-color, redLight)
+
+  &.canDrop
+    +theme(background-color, greenLight)
+

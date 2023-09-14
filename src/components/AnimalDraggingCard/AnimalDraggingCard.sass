@@ -12,8 +12,10 @@
   outline: none
   transition: 0.3s
   cursor: pointer
-  color: inherit
   
   &:hover,
   &:focus
     +theme(background-color, accent2Light)
+
+  &.dragging
+    opacity: 0
