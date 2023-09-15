@@ -152,17 +152,15 @@ export const resources = {
         },
       },
       components: {
-        AnimalModalForm: {
-          add: {
-            title: 'Add a patient',
-            success: 'Patient successfully added',
-            submit: 'Add',
-          },
-          update: {
-            title: 'Edit a patient',
-            success: 'The patient has been successfully updated',
-            submit: 'Save',
-          },
+        AnimalModalAddForm: {
+          title: 'Add a patient',
+          success: 'Patient successfully added',
+          submit: 'Add',
+        },
+        AnimalModalUpdateForm: {
+          title: 'Edit a patient',
+          success: 'The patient has been successfully updated',
+          submit: 'Save',
         },
         ManagePanel: {
           convalescents: 'Convalescents',
@@ -377,17 +375,15 @@ export const resources = {
         },
       },
       components: {
-        AnimalModalForm: {
-          add: {
-            title: 'Добавить пациента',
-            success: 'Пациент успешно добавлен',
-            submit: 'Добавить',
-          },
-          update: {
-            title: 'Редактировать пациента',
-            success: 'Пациент успешно обновлен',
-            submit: 'Сохранить',
-          },
+        AnimalModalAddForm: {
+          title: 'Добавить пациента',
+          success: 'Пациент успешно добавлен',
+          submit: 'Добавить',
+        },
+        AnimalModalUpdateForm: {
+          title: 'Редактировать пациента',
+          success: 'Пациент успешно обновлен',
+          submit: 'Сохранить',
         },
         ManagePanel: {
           convalescents: 'Выздоравливающие',

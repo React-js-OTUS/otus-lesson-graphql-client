@@ -3,17 +3,18 @@ import cn from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { FetchResult, useMutation } from '@apollo/client';
 import { FormikConfig, useFormik } from 'formik';
-import { AnimalForm, AnimalFormErrors, AnimalFormValues, AnimalFormProps } from 'src/components/Forms';
+import { AnimalForm, AnimalFormErrors, AnimalFormProps } from 'src/components/Forms';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { Button, message } from 'antd';
 import { isNotDefinedString } from 'src/utils/validation';
 import { Title } from 'src/components/Title';
 import deepEqual from 'fast-deep-equal';
 import { deepClear } from 'src/utils/deepClear';
+import { AnimalAddInput } from 'src/server.types';
 import { ADD_ANIMAL, AddAnimalData, AddAnimalVars } from './connection';
-import s from './AnimalCompletedForm.sass';
+import s from './AnimalAddCompletedForm.sass';
 
-export type AnimalCompletedFormProps = Omit<AnimalFormProps, 'formManager'> & {
+export type AnimalAddCompletedFormProps = Omit<AnimalFormProps, 'formManager'> & {
   className?: string;
   onSuccess?: (result: FetchResult<AddAnimalData>) => void;
   title: React.ReactNode;
@@ -21,12 +22,12 @@ export type AnimalCompletedFormProps = Omit<AnimalFormProps, 'formManager'> & {
   successMessageText: React.ReactNode;
 };
 
-export type AnimalCompletedFormRef = {
-  setValue: (value: AnimalFormValues) => void;
+export type AnimalAddCompletedFormRef = {
+  setValue: (value: AnimalAddInput) => void;
   isChanged: () => boolean;
 };
 
-const initialValues: AnimalFormValues = {
+const initialValues: AnimalAddInput = {
   age: undefined,
   comment: undefined,
   diseaseIds: undefined,
@@ -35,13 +36,13 @@ const initialValues: AnimalFormValues = {
   type: undefined,
 };
 
-export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalCompletedFormProps>(
+export const AnimalAddCompletedForm = forwardRef<AnimalAddCompletedFormRef, AnimalAddCompletedFormProps>(
   ({ className, successMessageText, submitText, onSuccess, title, ...props }, ref) => {
     const { t } = useTranslation();
     const [add, { loading }] = useMutation<AddAnimalData, AddAnimalVars>(ADD_ANIMAL);
 
-    const { onSubmit, validate } = useMemo<Pick<FormikConfig<AnimalFormValues>, 'onSubmit' | 'validate'>>(() => {
-      const { catcher } = createErrorHandlers<keyof AnimalFormValues>((code, _, error) => {
+    const { onSubmit, validate } = useMemo<Pick<FormikConfig<AnimalAddInput>, 'onSubmit' | 'validate'>>(() => {
+      const { catcher } = createErrorHandlers<keyof AnimalAddInput>((code, _, error) => {
         if (code === null) {
           message.error(t(`errors.${error.message}`));
         } else {
@@ -74,7 +75,7 @@ export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalComp
       };
     }, [t, add, onSuccess, successMessageText]);
 
-    const formManager = useFormik<AnimalFormValues>({
+    const formManager = useFormik<AnimalAddInput>({
       initialValues,
       onSubmit,
       validate,
