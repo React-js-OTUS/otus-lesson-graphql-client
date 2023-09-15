@@ -6,6 +6,7 @@ import { AnimalFormValues } from 'src/components/Forms';
 import { useOpenCloseNotMemo } from 'src/hooks/useOpenCloseNotMemo';
 import { useModalPrevent } from 'src/hooks/useModalPrevent';
 import { useTranslation } from 'react-i18next';
+import { InputRef } from 'antd';
 import s from './AnimalModalForm.sass';
 
 export type AnimalModalFormProps = {
@@ -15,9 +16,11 @@ export type AnimalModalFormProps = {
 
 export const AnimalModalForm: FC<AnimalModalFormProps> = ({ className, children }) => {
   const form = useRef<AnimalCompletedFormRef>();
+  const input = useRef<InputRef>();
   const { t } = useTranslation();
   const [visible, { open, close }] = useOpenCloseNotMemo();
   const prevent = useModalPrevent();
+
   return (
     <>
       {children({
@@ -27,8 +30,14 @@ export const AnimalModalForm: FC<AnimalModalFormProps> = ({ className, children 
           if (initialValue) form.current.setValue(initialValue);
         },
       })}
-      <Modal visible={visible} onClose={close} className={cn(s.root, className)}>
+      <Modal
+        visible={visible}
+        onClose={close}
+        afterOpen={() => input.current?.focus()}
+        className={cn(s.root, className)}
+      >
         <AnimalCompletedForm
+          autoFocusElement={input}
           ref={form}
           onSuccess={close}
           title={t`components.AnimalModalForm.add.title`}
