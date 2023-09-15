@@ -7,7 +7,7 @@ import { usersSelectors } from 'src/store/users';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { profileSelectors } from 'src/store/profile';
-import { Animal, AnimalType, User } from 'src/server.types';
+import { Animal, User } from 'src/server.types';
 import { Title } from 'src/components/Title';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
@@ -44,16 +44,7 @@ export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
     }
   });
   const onTake: UsersPanelProps['onTake'] = (doctor, animal) => {
-    const { id, __typename, diseases, ...rest } = animal;
-    delete rest.doctor;
-    delete rest.updatedAt;
-    const diseaseIds = diseases?.map((i) => i.id);
-    updateAnimal({
-      variables: {
-        id,
-        input: { ...rest, diseaseIds, type: __typename as AnimalType, doctorId: doctor.id },
-      },
-    }).catch(catcher);
+    updateAnimal({ variables: { id: animal.id, input: { doctorId: doctor.id } } }).catch(catcher);
   };
   const canDrop = (doctor: User) => doctor.id === profile.id;
 

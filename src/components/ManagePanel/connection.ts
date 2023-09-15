@@ -3,8 +3,8 @@ import { Mutation, MutationUpdateAnimalArgs } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
 
 export const SET_DOCTOR_FOR_ANIMAL = gql`
-  mutation setDoctorForAnimal($id: ID!, $input: AnimalInput!) {
-    updateAnimal(id: $id, input: $input) {
+  mutation setDoctorForAnimal($id: ID!, $input: AnimalUpdateInput!) {
+    updateAnimal(id: $id, input: $input, partial: true) {
       ... on Cat {
         id
       }
