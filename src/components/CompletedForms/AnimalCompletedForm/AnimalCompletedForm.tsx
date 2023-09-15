@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { forwardRef, useMemo, useImperativeHandle } from 'react';
 import cn from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
@@ -18,6 +18,10 @@ export type AnimalCompletedFormProps = {
   successMessageText: React.ReactNode;
 };
 
+export type AnimalCompletedFormRef = {
+  setValue: (value: AnimalFormValues) => void;
+};
+
 const initialValues: AnimalFormValues = {
   age: undefined,
   comment: undefined,
@@ -27,59 +31,58 @@ const initialValues: AnimalFormValues = {
   type: undefined,
 };
 
-export const AnimalCompletedForm: FC<AnimalCompletedFormProps> = ({
-  className,
-  successMessageText,
-  submitText,
-  title,
-}) => {
-  const { t } = useTranslation();
-  const [add, { loading }] = useMutation<AddAnimalData, AddAnimalVars>(ADD_ANIMAL);
+export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalCompletedFormProps>(
+  ({ className, successMessageText, submitText, title }, ref) => {
+    const { t } = useTranslation();
+    const [add, { loading }] = useMutation<AddAnimalData, AddAnimalVars>(ADD_ANIMAL);
 
-  const { onSubmit, validate } = useMemo<Pick<FormikConfig<AnimalFormValues>, 'onSubmit' | 'validate'>>(() => {
-    const { catcher } = createErrorHandlers<keyof AnimalFormValues>((code, _, error) => {
-      if (code === null) {
-        message.error(t(`errors.${error.message}`));
-      } else {
-        message.error(t(`errors.${code}`));
-      }
+    const { onSubmit, validate } = useMemo<Pick<FormikConfig<AnimalFormValues>, 'onSubmit' | 'validate'>>(() => {
+      const { catcher } = createErrorHandlers<keyof AnimalFormValues>((code, _, error) => {
+        if (code === null) {
+          message.error(t(`errors.${error.message}`));
+        } else {
+          message.error(t(`errors.${code}`));
+        }
+      });
+      return {
+        onSubmit: (values, { resetForm }) => {
+          add({ variables: { input: values } })
+            .then(() => {
+              resetForm();
+              message.success(successMessageText);
+            })
+            .catch(catcher);
+        },
+        validate: (values) => {
+          const errors = {} as AnimalFormErrors;
+          if (isNotDefinedString(values.name)) {
+            errors.name = t(`errors.is_required`);
+          }
+          if (isNotDefinedString(values.type)) {
+            errors.type = t(`errors.is_required`);
+          }
+          return errors;
+        },
+      };
+    }, [successMessageText, t, add]);
+
+    const formManager = useFormik<AnimalFormValues>({
+      initialValues,
+      onSubmit,
+      validate,
     });
-    return {
-      onSubmit: (values, { resetForm }) => {
-        add({ variables: { input: values } })
-          .then(() => {
-            resetForm();
-            message.success(successMessageText);
-          })
-          .catch(catcher);
-      },
-      validate: (values) => {
-        const errors = {} as AnimalFormErrors;
-        if (isNotDefinedString(values.name)) {
-          errors.name = t(`errors.is_required`);
-        }
-        if (isNotDefinedString(values.type)) {
-          errors.type = t(`errors.is_required`);
-        }
-        return errors;
-      },
-    };
-  }, [successMessageText, t, add]);
+    const { submitForm, setValues } = formManager;
 
-  const formManager = useFormik<AnimalFormValues>({
-    initialValues,
-    onSubmit,
-    validate,
-  });
-  const { submitForm } = formManager;
+    useImperativeHandle(ref, () => ({ setValue: setValues }), [setValues]);
 
-  return (
-    <div className={cn(s.root, className)}>
-      <Title className={s.title}>{title}</Title>
-      <AnimalForm formManager={formManager} />
-      <Button type="primary" loading={loading} onClick={submitForm}>
-        {submitText}
-      </Button>
-    </div>
-  );
-};
+    return (
+      <div className={cn(s.root, className)}>
+        <Title className={s.title}>{title}</Title>
+        <AnimalForm formManager={formManager} />
+        <Button type="primary" loading={loading} onClick={submitForm}>
+          {submitText}
+        </Button>
+      </div>
+    );
+  }
+);

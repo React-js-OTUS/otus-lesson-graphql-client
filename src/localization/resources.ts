@@ -144,12 +144,31 @@ export const resources = {
       fields: {
         string: 'String value',
       },
+      hooks: {
+        useModalPrevent: {
+          title: 'Data will be lost, continue?',
+          ok: 'Ok',
+          cancel: 'Cancel',
+        },
+      },
       components: {
+        AnimalModalForm: {
+          add: {
+            title: 'Add a patient',
+            success: 'Patient successfully added',
+            submit: 'Add',
+          },
+          update: {
+            title: 'Edit a patient',
+            success: 'The patient has been successfully updated',
+            submit: 'Save',
+          },
+        },
         ManagePanel: {
           convalescents: 'Convalescents',
           doctors: 'Doctors',
           healthy: 'Healthy',
-          empty: 'Пусто',
+          empty: 'Empty',
         },
         AnimalTypeSelect: {
           placeholder: 'Choose the type of animal',
@@ -350,7 +369,26 @@ export const resources = {
       fields: {
         string: 'Строковое значение',
       },
+      hooks: {
+        useModalPrevent: {
+          title: 'Данные будут потеряны, продолжить?',
+          ok: 'Добро',
+          cancel: 'Отмена',
+        },
+      },
       components: {
+        AnimalModalForm: {
+          add: {
+            title: 'Добавить пациента',
+            success: 'Пациент успешно добавлен',
+            submit: 'Добавить',
+          },
+          update: {
+            title: 'Редактировать пациента',
+            success: 'Пациент успешно обновлен',
+            submit: 'Сохранить',
+          },
+        },
         ManagePanel: {
           convalescents: 'Выздоравливающие',
           doctors: 'Доктора',
