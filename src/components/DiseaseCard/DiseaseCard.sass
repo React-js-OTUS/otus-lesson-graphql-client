@@ -1,0 +1,19 @@
+@import src/styles/common
+
+.root
+  display: inline-flex
+  gap: 8px
+  align-items: center
+  padding: 4px 8px
+  border-radius: 2px
+  +theme(border, border)
+  +theme(background-color, mainBg)
+  +theme(box-shadow, boxShadow)
+  outline: none
+  transition: 0.3s
+  cursor: pointer
+  color: inherit
+  
+  &:hover,
+  &:focus
+    +theme(background-color, accent2Light)
