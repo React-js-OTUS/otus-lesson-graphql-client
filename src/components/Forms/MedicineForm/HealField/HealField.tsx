@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { FormItem } from 'src/components/FormItem';
 import { getFieldCallbacks, getValidates } from 'src/utils/validation';
-import { DiseasesSelect } from 'src/components/Selections/DiseasesSelect';
 import { Disease } from 'src/server.types';
+import { DiseaseTypeSelect } from 'src/components/Selections';
 import { MedicineFormProps, MedicineFormValues, MedicineFormHandlers } from '../types';
 import s from './HealField.sass';
 
@@ -11,7 +11,6 @@ export type HealFieldProps = Pick<MedicineFormProps, 'className' | 'disabled'> &
   submitCount: number;
   touched: boolean;
   errors: string;
-  items: Disease[];
   value: MedicineFormValues['heal'];
   setFieldValue: MedicineFormHandlers['setFieldValue'];
   setFieldTouched: MedicineFormHandlers['setFieldTouched'];
@@ -28,7 +27,6 @@ export const HealField = memo<HealFieldProps>(
     touched,
     title,
     placeholder,
-    items,
     value,
     errors,
     disabled,
@@ -46,12 +44,12 @@ export const HealField = memo<HealFieldProps>(
         validateStatus={validateStatus}
         help={help}
       >
-        <DiseasesSelect
+        <DiseaseTypeSelect
+          mode="multiple"
           disabled={disabled}
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          items={items}
           placeholder={placeholder}
         />
       </FormItem>
