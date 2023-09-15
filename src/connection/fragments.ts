@@ -42,10 +42,11 @@ export const DOG_FRAGMENT = gql`
       id
     }
     diseases {
-      id
+      ...Disease
     }
     updatedAt
   }
+  ${DISEASE_FRAGMENT}
 `;
 
 export const CAT_FRAGMENT = gql`
@@ -58,10 +59,11 @@ export const CAT_FRAGMENT = gql`
       id
     }
     diseases {
-      id
+      ...Disease
     }
     updatedAt
   }
+  ${DISEASE_FRAGMENT}
 `;
 export const BIRD_FRAGMENT = gql`
   fragment Bird on Bird {
@@ -73,10 +75,11 @@ export const BIRD_FRAGMENT = gql`
       id
     }
     diseases {
-      id
+      ...Disease
     }
     updatedAt
   }
+  ${DISEASE_FRAGMENT}
 `;
 export const ANIMAL_FRAGMENT = gql`
   fragment Animal on Animal {

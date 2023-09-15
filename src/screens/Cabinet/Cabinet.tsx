@@ -10,6 +10,7 @@ import { Animal } from 'src/server.types';
 import { useMutation } from '@apollo/client';
 import { AnimalCards } from 'src/components/AnimalCards';
 import { AnimalEditingCards } from 'src/components/AnimalEditingCards';
+import { AnimalInfoCard } from 'src/components/AnimalInfoCard';
 import { TO_HEAL_ANIMAL, ToHealAnimalData, ToHealAnimalVars } from './connection';
 import s from './Cabinet.sass';
 
@@ -55,6 +56,7 @@ export const Cabinet: FC = () => {
       <Title>{t`screens.Cabinet.patients`}</Title>
       <AnimalCards onClick={onChooseAnimal} activeId={animal?.id} value={animalsByTypes.forDoctors} />
       <Title>{t`screens.Cabinet.table`}</Title>
+      <AnimalInfoCard value={animal} />
       <Title>{t`screens.Cabinet.healthy`}</Title>
       <AnimalEditingCards value={animalsByTypes.healthy} />
     </Page>
