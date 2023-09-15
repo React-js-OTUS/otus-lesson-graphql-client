@@ -44,7 +44,7 @@ export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
     }
   });
   const onTake: UsersPanelProps['onTake'] = (doctor, animal) => {
-    updateAnimal({ variables: { id: animal.id, input: { doctorId: doctor.id } } }).catch(catcher);
+    updateAnimal({ variables: { id: animal.id, doctorId: doctor.id } }).catch(catcher);
   };
   const canDrop = (doctor: User) => doctor.id === profile.id;
 
