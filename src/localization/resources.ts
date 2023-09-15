@@ -120,6 +120,16 @@ export const resources = {
             placeholder: 'Enter diseases',
           },
         },
+        MedicineForm: {
+          name: {
+            title: 'Name',
+            placeholder: 'Enter name',
+          },
+          heal: {
+            title: 'Heal',
+            placeholder: 'Enter diseases',
+          },
+        },
         ProfileForm: {
           nickname: {
             title: 'Nickname',
@@ -340,6 +350,16 @@ export const resources = {
           },
           diseases: {
             title: 'Заболевания',
+            placeholder: 'Укажите заболевания',
+          },
+        },
+        MedicineForm: {
+          name: {
+            title: 'Имя',
+            placeholder: 'Укажите имя',
+          },
+          heal: {
+            title: 'Лечит',
             placeholder: 'Укажите заболевания',
           },
         },

@@ -13,4 +13,4 @@ export type AnimalFormProps = FormProps<AnimalFormValues> & {
   required?: AnimalFormRequired;
 };
 
-export type FormHandlers = FormikHandlers & FormikHelpers<AnimalUpdateInput>;
+export type FormHandlers = FormikHandlers & FormikHelpers<AnimalFormValues>;
