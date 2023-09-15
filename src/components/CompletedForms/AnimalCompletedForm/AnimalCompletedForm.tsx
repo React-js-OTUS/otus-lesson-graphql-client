@@ -50,7 +50,7 @@ export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalComp
       });
       return {
         onSubmit: (values, { resetForm }) => {
-          add({ variables: { input: values } })
+          add({ variables: { input: values as AddAnimalVars['input'] } })
             .then((res) => {
               onSuccess?.(res);
               resetForm();
