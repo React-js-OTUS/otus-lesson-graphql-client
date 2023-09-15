@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { animalsSelectors } from 'src/store/animals';
 import { medicinesSelectors } from 'src/store/medicines';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
-import { message } from 'antd';
+import { Button, message } from 'antd';
 import { Animal, Medicine } from 'src/server.types';
 import { useMutation } from '@apollo/client';
 import { AnimalCards } from 'src/components/AnimalCards';
@@ -14,6 +14,8 @@ import { AnimalEditingCards } from 'src/components/AnimalEditingCards';
 import deepEqual from 'fast-deep-equal';
 import { AnimalDropInfoCard } from 'src/components/AnimalDropInfoCard';
 import { MedicineDraggingCards } from 'src/components/MedicineDraggingCards';
+import { PlusOutlined } from '@ant-design/icons';
+import { MedicineModalAddForm } from 'src/components/ModalForms';
 import { TO_HEAL_ANIMAL, ToHealAnimalData, ToHealAnimalVars } from './connection';
 import s from './Cabinet.sass';
 
@@ -88,9 +90,12 @@ export const Cabinet: FC = () => {
           <AnimalDropInfoCard dndName={dndName} value={animal} onTake={onTake} canDrop={canDrop} />
         </div>
         <div>
-          <Title>{t`screens.Cabinet.medicines`}</Title>
+          <div className={s.line}>
+            <Title>{t`screens.Cabinet.medicines`}</Title>
+            <MedicineModalAddForm>{({ open }) => <PlusOutlined onClick={() => open()} />}</MedicineModalAddForm>
+          </div>
 
-          <MedicineDraggingCards value={medicines} dndName={dndName} />
+          <MedicineDraggingCards className={s.medicines} value={medicines} dndName={dndName} />
         </div>
       </div>
       <Title>{t`screens.Cabinet.healthy`}</Title>

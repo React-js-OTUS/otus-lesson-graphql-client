@@ -5,8 +5,8 @@ import { AnimalIcon } from 'src/components/AnimalIcon';
 import { useTranslation } from 'react-i18next';
 import { DiseaseCards } from 'src/components/DiseaseCards';
 import { Title } from 'src/components/Title';
-import { AnimalModalUpdateForm } from 'src/components/ModalForms';
-import { EditOutlined } from '@ant-design/icons';
+import { AnimalModalUpdateForm, DiseaseModalAddForm } from 'src/components/ModalForms';
+import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import s from './AnimalInfoCard.sass';
 
 export type AnimalInfoCardProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -50,7 +50,10 @@ export const AnimalInfoCard = forwardRef<AnimalInfoCardRef, AnimalInfoCardProps>
           <div>{value.comment}</div>
         </div>
         <div className={s.item}>
-          <Title>{t`components.AnimalInfoCard.diseases`}</Title>
+          <div className={s.line}>
+            <Title>{t`components.AnimalInfoCard.diseases`}</Title>
+            <DiseaseModalAddForm>{({ open }) => <PlusOutlined onClick={() => open()} />}</DiseaseModalAddForm>
+          </div>
           <DiseaseCards value={value.diseases} />
         </div>
       </div>
