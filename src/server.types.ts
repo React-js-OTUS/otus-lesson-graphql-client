@@ -75,14 +75,14 @@ export type ChangePasswordInput = {
 
 export type Disease = {
   __typename?: 'Disease';
-  desc: Scalars['String']['output'];
+  desc?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   type: DiseaseType;
 };
 
 export type DiseaseInput = {
-  desc: Scalars['String']['input'];
+  desc?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   type: DiseaseType;
 };
