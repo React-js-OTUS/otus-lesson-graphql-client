@@ -3,7 +3,7 @@ import cn from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { FetchResult, useMutation } from '@apollo/client';
 import { FormikConfig, useFormik } from 'formik';
-import { AnimalForm, AnimalFormErrors, AnimalFormValues } from 'src/components/Forms';
+import { AnimalForm, AnimalFormErrors, AnimalFormValues, AnimalFormProps } from 'src/components/Forms';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { Button, message } from 'antd';
 import { isNotDefinedString } from 'src/utils/validation';
@@ -11,7 +11,7 @@ import { Title } from 'src/components/Title';
 import { ADD_ANIMAL, AddAnimalData, AddAnimalVars } from './connection';
 import s from './AnimalCompletedForm.sass';
 
-export type AnimalCompletedFormProps = {
+export type AnimalCompletedFormProps = Omit<AnimalFormProps, 'formManager'> & {
   className?: string;
   onSuccess?: (result: FetchResult<AddAnimalData>) => void;
   title: React.ReactNode;
@@ -33,7 +33,7 @@ const initialValues: AnimalFormValues = {
 };
 
 export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalCompletedFormProps>(
-  ({ className, successMessageText, submitText, onSuccess, title }, ref) => {
+  ({ className, successMessageText, submitText, onSuccess, title, ...props }, ref) => {
     const { t } = useTranslation();
     const [add, { loading }] = useMutation<AddAnimalData, AddAnimalVars>(ADD_ANIMAL);
 
@@ -83,7 +83,7 @@ export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalComp
     return (
       <div className={cn(s.root, className)}>
         <Title className={s.title}>{title}</Title>
-        <AnimalForm formManager={formManager} />
+        <AnimalForm formManager={formManager} {...props} />
         <Button type="primary" loading={loading} onClick={submitForm}>
           {submitText}
         </Button>
