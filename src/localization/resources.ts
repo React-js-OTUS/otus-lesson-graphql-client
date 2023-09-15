@@ -62,6 +62,12 @@ export const resources = {
         HomeScreen: {
           title: 'Manage panel',
         },
+        Settings: {
+          title: 'Settings',
+        },
+        Cabinet: {
+          title: 'Cabinet',
+        },
         TeachersScreen: {
           title: 'Teachers',
           desc: "Someday there will be teachers' cards here, but that's not for sure",
@@ -176,6 +182,14 @@ export const resources = {
         },
       },
       components: {
+        DiseasesManagePanel: {
+          title: 'Diseases',
+          empty: 'Empty',
+        },
+        MedicinesManagePanel: {
+          title: 'Medicines',
+          empty: 'Empty',
+        },
         AnimalModalAddForm: {
           title: 'Add a patient',
           success: 'Patient successfully added',
@@ -245,6 +259,8 @@ export const resources = {
         header: {
           nav: 'Navigation',
           root: 'Manage panel',
+          settings: 'Settings',
+          cabinet: 'Cabinet',
           profile: 'Profile',
         },
       },
@@ -270,10 +286,10 @@ export const resources = {
           Bird: 'bird',
         },
         DiseaseType: {
-          Broken: 'broken',
-          Cold: 'cold',
-          Stomach: 'stomach',
-          Parasites: 'parasites',
+          broken: 'broken',
+          cold: 'cold',
+          stomach: 'stomach',
+          parasites: 'parasites',
         },
       },
     },
@@ -337,6 +353,12 @@ export const resources = {
         },
         HomeScreen: {
           title: 'Панель управления',
+        },
+        Settings: {
+          title: 'Настройки',
+        },
+        Cabinet: {
+          title: 'Кабинет',
         },
         TeachersScreen: {
           title: 'Преподаватели',
@@ -452,6 +474,14 @@ export const resources = {
         },
       },
       components: {
+        DiseasesManagePanel: {
+          title: 'Заболевания',
+          empty: 'Пусто',
+        },
+        MedicinesManagePanel: {
+          title: 'Лекарства',
+          empty: 'Пусто',
+        },
         AnimalModalAddForm: {
           title: 'Добавить пациента',
           success: 'Пациент успешно добавлен',
@@ -521,6 +551,8 @@ export const resources = {
         header: {
           nav: 'Навигация',
           root: 'Панель управления',
+          settings: 'Настройки',
+          cabinet: 'Кабинет',
           profile: 'Профиль',
         },
       },
@@ -546,10 +578,10 @@ export const resources = {
           Bird: 'Птица',
         },
         DiseaseType: {
-          Broken: 'Перелом',
-          Cold: 'Переохлаждение',
-          Stomach: 'Желудок',
-          Parasites: 'Паразиты',
+          broken: 'Перелом',
+          cold: 'Переохлаждение',
+          stomach: 'Желудок',
+          parasites: 'Паразиты',
         },
       },
     },

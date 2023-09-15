@@ -20,7 +20,7 @@ import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { Button, message } from 'antd';
 import { AnimalModalAddForm } from 'src/components/ModalForms/AnimalModalAddForm';
 import { PlusOutlined } from '@ant-design/icons';
-import { AnimalCards } from '../AnimalCards';
+import { AnimalEditingCards } from '../AnimalEditingCards';
 import { UsersPanel, UsersPanelProps } from './UsersPanel';
 import s from './ManagePanel.sass';
 
@@ -92,7 +92,7 @@ export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
           onTake={onTake}
         />
         <Title className={s.title}>{t`components.ManagePanel.healthy`}</Title>
-        <AnimalCards value={animalsByTypes.healthy} empty={t`components.ManagePanel.empty`} />
+        <AnimalEditingCards value={animalsByTypes.healthy} empty={t`components.ManagePanel.empty`} />
       </div>
     </DndProvider>
   );

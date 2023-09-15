@@ -10,13 +10,13 @@ import { InputRef } from 'antd';
 import { DiseaseInput } from 'src/server.types';
 import s from './DiseaseModalUpdateForm.sass';
 
-export type DiseaseModalFormProps = {
+export type DiseaseModalUpdateFormProps = {
   id: string;
   className?: string;
   children: (callbacks: { open: (initialValue?: DiseaseFormValues) => void; close: () => void }) => React.ReactNode;
 };
 
-export const DiseaseModalUpdateForm: FC<DiseaseModalFormProps> = ({ className, id, children }) => {
+export const DiseaseModalUpdateForm: FC<DiseaseModalUpdateFormProps> = ({ className, id, children }) => {
   const form = useRef<DiseaseUpdateCompletedFormRef>();
   const input = useRef<InputRef>();
   const { t } = useTranslation();

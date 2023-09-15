@@ -10,12 +10,12 @@ import { InputRef } from 'antd';
 import { MedicineInput } from 'src/server.types';
 import s from './MedicineModalAddForm.sass';
 
-export type MedicineModalFormProps = {
+export type MedicineModalAddFormProps = {
   className?: string;
   children: (callbacks: { open: (initialValue?: MedicineFormValues) => void; close: () => void }) => React.ReactNode;
 };
 
-export const MedicineModalAddForm: FC<MedicineModalFormProps> = ({ className, children }) => {
+export const MedicineModalAddForm: FC<MedicineModalAddFormProps> = ({ className, children }) => {
   const form = useRef<MedicineAddCompletedFormRef>();
   const input = useRef<InputRef>();
   const { t } = useTranslation();

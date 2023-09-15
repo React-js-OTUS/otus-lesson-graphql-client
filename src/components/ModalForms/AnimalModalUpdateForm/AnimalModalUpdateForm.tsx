@@ -10,13 +10,13 @@ import { InputRef } from 'antd';
 import { AnimalUpdateInput } from 'src/server.types';
 import s from './AnimalModalUpdateForm.sass';
 
-export type AnimalModalFormProps = {
+export type AnimalModalUpdateFormProps = {
   id: string;
   className?: string;
   children: (callbacks: { open: (initialValue?: AnimalFormValues) => void; close: () => void }) => React.ReactNode;
 };
 
-export const AnimalModalUpdateForm: FC<AnimalModalFormProps> = ({ className, id, children }) => {
+export const AnimalModalUpdateForm: FC<AnimalModalUpdateFormProps> = ({ className, id, children }) => {
   const form = useRef<AnimalUpdateCompletedFormRef>();
   const input = useRef<InputRef>();
   const { t } = useTranslation();
