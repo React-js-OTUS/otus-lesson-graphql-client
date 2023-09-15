@@ -3,7 +3,6 @@ import cn from 'clsx';
 import Input from 'antd/lib/input';
 import { FormikHandlers } from 'formik/dist/types';
 import { LockOutlined } from '@ant-design/icons';
-import { useTranslation } from 'react-i18next';
 import { FormItem } from 'src/components/FormItem';
 import { getValidates } from 'src/utils/validation';
 import { ChangePasswordFormProps } from '../types';
@@ -17,24 +16,30 @@ export type NewPasswordFieldProps = Pick<ChangePasswordFormProps, 'className' | 
   onChange: FormikHandlers['handleChange'];
   onPressEnter: () => void;
   onBlur: FormikHandlers['handleBlur'];
+  title: React.ReactNode;
+  placeholder: string;
 };
 
 const prefix = <LockOutlined className="site-form-item-icon" />;
 
 export const NewPasswordField = memo<NewPasswordFieldProps>(
-  ({ className, onChange, onBlur, onPressEnter, touched, value, errors, disabled, submitCount }) => {
-    const { t } = useTranslation();
-
+  ({
+    className,
+    onChange,
+    onBlur,
+    title,
+    placeholder,
+    onPressEnter,
+    touched,
+    value,
+    errors,
+    disabled,
+    submitCount,
+  }) => {
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem
-        className={cn(s.root, className)}
-        title={t(`forms.ChangePasswordForm.newPassword.title`)}
-        required
-        validateStatus={validateStatus}
-        help={help}
-      >
+      <FormItem className={cn(s.root, className)} title={title} required validateStatus={validateStatus} help={help}>
         <Input.Password
           prefix={prefix}
           onPressEnter={onPressEnter}
@@ -44,7 +49,7 @@ export const NewPasswordField = memo<NewPasswordFieldProps>(
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          placeholder={t(`forms.ChangePasswordForm.newPassword.placeholder`)}
+          placeholder={placeholder}
         />
       </FormItem>
     );
