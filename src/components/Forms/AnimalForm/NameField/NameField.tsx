@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { Input } from 'antd';
-import { useTranslation } from 'react-i18next';
 import { FormItem } from 'src/components/FormItem';
 import { getValidates } from 'src/utils/validation';
 import { AnimalFormProps, AnimalFormValues, FormHandlers } from '../types';
@@ -15,33 +14,39 @@ export type NameFieldProps = Pick<AnimalFormProps, 'className' | 'disabled' | 'a
   onPressEnter: () => void;
   onChange: FormHandlers['handleChange'];
   onBlur: FormHandlers['handleBlur'];
+  title: React.ReactNode;
+  placeholder: string;
 };
 
 export const NameField = memo<NameFieldProps>(
-  ({ className, onChange, onBlur, onPressEnter, autoFocusElement, touched, value, errors, disabled, submitCount }) => {
-    const { t } = useTranslation();
-
+  ({
+    className,
+    onChange,
+    title,
+    placeholder,
+    onBlur,
+    onPressEnter,
+    autoFocusElement,
+    touched,
+    value,
+    errors,
+    disabled,
+    submitCount,
+  }) => {
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem
-        className={cn(s.root, className)}
-        title={t(`forms.AnimalForm.name.title`)}
-        required
-        validateStatus={validateStatus}
-        help={help}
-      >
+      <FormItem className={cn(s.root, className)} title={title} required validateStatus={validateStatus} help={help}>
         <Input
           disabled={disabled}
           ref={autoFocusElement}
           onPressEnter={onPressEnter}
-          data-cy="input"
           autoFocus
           name="name"
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          placeholder={t(`forms.AnimalForm.name.placeholder`)}
+          placeholder={placeholder}
         />
       </FormItem>
     );

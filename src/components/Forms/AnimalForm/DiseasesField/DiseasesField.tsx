@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
-import { useTranslation } from 'react-i18next';
 import { FormItem } from 'src/components/FormItem';
 import { getFieldCallbacks, getValidates } from 'src/utils/validation';
 import { DiseasesSelect } from 'src/components/Selections/DiseasesSelect';
@@ -16,30 +15,36 @@ export type DiseasesFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'>
   value: AnimalFormValues['diseaseIds'];
   setFieldValue: FormHandlers['setFieldValue'];
   setFieldTouched: FormHandlers['setFieldTouched'];
+  title: React.ReactNode;
+  placeholder: string;
 };
 
 export const DiseasesField = memo<DiseasesFieldProps>(
-  ({ className, setFieldValue, setFieldTouched, touched, items, value, errors, disabled, submitCount }) => {
-    const { t } = useTranslation();
-
+  ({
+    className,
+    setFieldValue,
+    setFieldTouched,
+    touched,
+    title,
+    placeholder,
+    items,
+    value,
+    errors,
+    disabled,
+    submitCount,
+  }) => {
     const { onBlur, onChange } = getFieldCallbacks('diseaseIds', { setFieldTouched, setFieldValue });
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem
-        required
-        className={cn(s.root, className)}
-        title={t(`forms.AnimalForm.diseases.title`)}
-        validateStatus={validateStatus}
-        help={help}
-      >
+      <FormItem required className={cn(s.root, className)} title={title} validateStatus={validateStatus} help={help}>
         <DiseasesSelect
           disabled={disabled}
           onChange={onChange}
           onBlur={onBlur}
           value={value}
           items={items}
-          placeholder={t(`forms.AnimalForm.diseases.placeholder`)}
+          placeholder={placeholder}
         />
       </FormItem>
     );
