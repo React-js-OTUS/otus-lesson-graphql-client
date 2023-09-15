@@ -3,6 +3,7 @@ import { Select, SelectProps } from 'antd';
 import cn from 'clsx';
 import { Disease } from 'src/server.types';
 import { TextSelection } from 'src/components/TextSelection';
+import { DiseaseIcon } from 'src/components/DiseaseIcon';
 import s from './DiseasesSelect.sass';
 
 export type DiseasesSelectProps = SelectProps & {
@@ -43,7 +44,10 @@ export const DiseasesSelect: FC<DiseasesSelectProps> = ({
     >
       {items?.map((item) => (
         <Select.Option key={item.id} title={item.name}>
-          <TextSelection text={item.name} selection={search} />
+          <div className={s.item}>
+            <DiseaseIcon value={item.type} />
+            <TextSelection text={item.name} selection={search} />
+          </div>
         </Select.Option>
       ))}
     </Select>
