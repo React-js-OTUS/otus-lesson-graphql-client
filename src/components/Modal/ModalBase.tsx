@@ -9,12 +9,15 @@ export type ModalBaseProps = ModalContentProps & {
   visible?: boolean;
   maskRef?: Ref<HTMLDivElement>;
   afterClose?: () => void;
+  afterOpen?: () => void;
 };
 
 export const ModalBase = memo<ModalBaseProps>(
-  ({ className, maskRef, afterClose, visible, full, classNameMask, onClose, children }) => {
-    const onTransitionEnd = (): void => {
-      if (!visible) setTimeout(() => afterClose?.());
+  ({ className, maskRef, afterClose, visible, full, classNameMask, onClose, afterOpen, children }) => {
+    const onAnimationEnd = (e: React.AnimationEvent): void => {
+      if (e.target !== e.currentTarget) return;
+      if (visible) afterOpen?.();
+      else afterClose?.();
     };
 
     const close = (e: MouseEvent): void => {
@@ -31,7 +34,7 @@ export const ModalBase = memo<ModalBaseProps>(
         ref={maskRef}
         role="presentation"
         onClick={close}
-        onTransitionEnd={onTransitionEnd}
+        onAnimationEnd={onAnimationEnd}
         className={cn(s.mask, classNameMask, visible && s.visible)}
       >
         <ModalContent onClose={onClose} full={full} className={clx}>
