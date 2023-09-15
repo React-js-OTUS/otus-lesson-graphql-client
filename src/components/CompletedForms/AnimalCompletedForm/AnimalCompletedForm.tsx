@@ -8,6 +8,8 @@ import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { Button, message } from 'antd';
 import { isNotDefinedString } from 'src/utils/validation';
 import { Title } from 'src/components/Title';
+import deepEqual from 'fast-deep-equal';
+import { deepClear } from 'src/utils/deepClear';
 import { ADD_ANIMAL, AddAnimalData, AddAnimalVars } from './connection';
 import s from './AnimalCompletedForm.sass';
 
@@ -21,6 +23,7 @@ export type AnimalCompletedFormProps = Omit<AnimalFormProps, 'formManager'> & {
 
 export type AnimalCompletedFormRef = {
   setValue: (value: AnimalFormValues) => void;
+  isChanged: () => boolean;
 };
 
 const initialValues: AnimalFormValues = {
@@ -76,9 +79,12 @@ export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalComp
       onSubmit,
       validate,
     });
-    const { submitForm, setValues } = formManager;
+    const { submitForm, setValues, values } = formManager;
 
-    useImperativeHandle(ref, () => ({ setValue: setValues }), [setValues]);
+    useImperativeHandle(ref, () => ({
+      setValue: setValues,
+      isChanged: () => !deepEqual(deepClear(values), deepClear(initialValues)),
+    }));
 
     return (
       <div className={cn(s.root, className)}>

@@ -21,10 +21,18 @@ export const AnimalModalForm: FC<AnimalModalFormProps> = ({ className, children 
   const [visible, { open, close }] = useOpenCloseNotMemo();
   const prevent = useModalPrevent();
 
+  const onClose = () => {
+    if (form.current?.isChanged()) {
+      prevent({ onOk: close });
+    } else {
+      close();
+    }
+  };
+
   return (
     <>
       {children({
-        close: () => prevent({ onOk: close }),
+        close: onClose,
         open: (initialValue) => {
           open();
           if (initialValue) form.current.setValue(initialValue);
@@ -32,7 +40,7 @@ export const AnimalModalForm: FC<AnimalModalFormProps> = ({ className, children 
       })}
       <Modal
         visible={visible}
-        onClose={close}
+        onClose={onClose}
         afterOpen={() => input.current?.focus()}
         className={cn(s.root, className)}
       >
