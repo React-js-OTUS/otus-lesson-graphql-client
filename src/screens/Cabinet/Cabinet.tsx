@@ -4,20 +4,24 @@ import { Page } from 'src/components/Page';
 import { Title } from 'src/components/Title';
 import { useSelector } from 'react-redux';
 import { animalsSelectors } from 'src/store/animals';
+import { medicinesSelectors } from 'src/store/medicines';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { message } from 'antd';
-import { Animal } from 'src/server.types';
+import { Animal, Medicine } from 'src/server.types';
 import { useMutation } from '@apollo/client';
 import { AnimalCards } from 'src/components/AnimalCards';
 import { AnimalEditingCards } from 'src/components/AnimalEditingCards';
-import { AnimalInfoCard } from 'src/components/AnimalInfoCard';
 import deepEqual from 'fast-deep-equal';
+import { AnimalDropInfoCard } from 'src/components/AnimalDropInfoCard';
+import { MedicineDraggingCards } from 'src/components/MedicineDraggingCards';
 import { TO_HEAL_ANIMAL, ToHealAnimalData, ToHealAnimalVars } from './connection';
 import s from './Cabinet.sass';
 
+const dndName = 'cabinet-table';
 export const Cabinet: FC = () => {
   const { t } = useTranslation();
   const animals = useSelector(animalsSelectors.get);
+  const medicines = useSelector(medicinesSelectors.get);
   const [animal, setAnimal] = useState<Animal>();
   const [updateAnimal] = useMutation<ToHealAnimalData, ToHealAnimalVars>(TO_HEAL_ANIMAL);
 
@@ -60,12 +64,35 @@ export const Cabinet: FC = () => {
     setAnimal((v) => (v?.id === value.id ? null : value));
   };
 
+  const canDrop = (anim: Animal, medicine: Medicine) =>
+    anim.diseases?.some((i) => medicine.heal?.some((l) => l === i.type));
+
+  const onTake = (anim: Animal, medicine: Medicine) => {
+    updateAnimal({
+      variables: {
+        id: anim.id,
+        diseaseIds: anim.diseases?.filter((i) => !medicine.heal.some((l) => l === i.type)).map((i) => i.id),
+      },
+    })
+      .then(() => message.success(t`screens.Cabinet.success`))
+      .catch(catcher);
+  };
+
   return (
     <Page title={t`screens.Cabinet.title`} className={s.root}>
       <Title>{t`screens.Cabinet.patients`}</Title>
       <AnimalCards onClick={onChooseAnimal} activeId={animal?.id} value={animalsByTypes.forDoctors} />
-      <Title>{t`screens.Cabinet.table`}</Title>
-      <AnimalInfoCard value={animal} />
+      <div className={s.main}>
+        <div className={s.table}>
+          <Title>{t`screens.Cabinet.table`}</Title>
+          <AnimalDropInfoCard dndName={dndName} value={animal} onTake={onTake} canDrop={canDrop} />
+        </div>
+        <div>
+          <Title>{t`screens.Cabinet.medicines`}</Title>
+
+          <MedicineDraggingCards value={medicines} dndName={dndName} />
+        </div>
+      </div>
       <Title>{t`screens.Cabinet.healthy`}</Title>
       <AnimalEditingCards value={animalsByTypes.healthy} />
     </Page>

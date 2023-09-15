@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import cn from 'clsx';
 import { Animal, Medicine } from 'src/server.types';
 import { AnimalInfoCard, AnimalInfoCardProps } from 'src/components/AnimalInfoCard';
@@ -21,15 +21,19 @@ export const AnimalDropInfoCard: FC<AnimalDropInfoCardProps> = ({
   dndName,
   ...props
 }) => {
+  const valueCopy = useRef(value);
+  valueCopy.current = value;
+
   const [{ isOver, _canDrop }, drop] = useDrop(() => ({
-    drop: (item: Medicine) => onTake(value, item),
-    canDrop: (item: Medicine) => canDrop(value, item),
+    drop: (item: Medicine) => onTake(valueCopy.current, item),
+    canDrop: (item: Medicine) => canDrop(valueCopy.current, item),
     accept: dndName,
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       _canDrop: monitor.canDrop(),
     }),
   }));
+
   if (!value) return null;
 
   return (

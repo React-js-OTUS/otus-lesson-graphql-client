@@ -71,6 +71,9 @@ export const resources = {
           title: 'Cabinet',
           patients: 'My patients',
           table: 'Table',
+          medicines: 'Medicines',
+          success: 'Success!',
+
           healthy: 'My healthy patients',
         },
         TeachersScreen: {
@@ -372,6 +375,8 @@ export const resources = {
           title: 'Кабинет',
           patients: 'Мои пациенты',
           table: 'Стол',
+          medicines: 'Лекарства',
+          success: 'Успех!',
           healthy: 'Мои здоровые пациенты',
         },
         TeachersScreen: {
