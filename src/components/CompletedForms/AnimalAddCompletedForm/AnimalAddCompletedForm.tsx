@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, useImperativeHandle } from 'react';
+import React, { forwardRef, useMemo, useImperativeHandle, useRef } from 'react';
 import cn from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { FetchResult, useMutation } from '@apollo/client';
@@ -82,9 +82,14 @@ export const AnimalAddCompletedForm = forwardRef<AnimalAddCompletedFormRef, Anim
     });
     const { submitForm, setValues, values } = formManager;
 
+    const initial = useRef(initialValues);
+
     useImperativeHandle(ref, () => ({
-      setValue: setValues,
-      isChanged: () => !deepEqual(deepClear(values), deepClear(initialValues)),
+      setValue: (v) => {
+        initial.current = v;
+        setValues(v);
+      },
+      isChanged: () => !deepEqual(deepClear(values), deepClear(initial.current)),
     }));
 
     return (

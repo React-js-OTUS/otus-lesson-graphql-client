@@ -30,21 +30,23 @@ export const AnimalModalAddForm: FC<AnimalModalFormProps> = ({ className, childr
     }
   };
 
+  const initial = useRef<AnimalAddInput>();
+
+  const afterOpen = () => {
+    input.current?.focus();
+    if (initial.current) form.current?.setValue(initial.current);
+  };
+
   return (
     <>
       {children({
         close: onClose,
-        open: (initialValue) => {
+        open: (initialValue: AnimalAddInput) => {
           open();
-          if (initialValue) form.current.setValue(initialValue as AnimalAddInput);
+          initial.current = initialValue;
         },
       })}
-      <Modal
-        visible={visible}
-        onClose={onClose}
-        afterOpen={() => input.current?.focus()}
-        className={cn(s.root, className)}
-      >
+      <Modal visible={visible} onClose={onClose} afterOpen={afterOpen} className={cn(s.root, className)}>
         <AnimalAddCompletedForm
           autoFocusElement={input}
           ref={form}

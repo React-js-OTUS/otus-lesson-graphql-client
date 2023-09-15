@@ -9,7 +9,9 @@ export type AnimalCardProps = React.HTMLAttributes<HTMLButtonElement> & {
   value: Animal;
 };
 
-export const AnimalCard = forwardRef<HTMLButtonElement, AnimalCardProps>(({ className, value, ...props }, ref) => {
+export type AnimalCardRef = HTMLButtonElement;
+
+export const AnimalCard = forwardRef<AnimalCardRef, AnimalCardProps>(({ className, value, ...props }, ref) => {
   if (!value) return null;
   return (
     <button ref={ref} {...props} type="button" className={cn(s.root, className)}>

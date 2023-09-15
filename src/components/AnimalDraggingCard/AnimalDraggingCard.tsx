@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import cn from 'clsx';
-import { AnimalCard, AnimalCardProps } from 'src/components/AnimalCard';
+import { AnimalEditingCardProps, AnimalEditingCard } from 'src/components/AnimalEditingCard';
 import { useDrag } from 'react-dnd';
 import s from './AnimalDraggingCard.sass';
 
-export type AnimalDraggingCardProps = AnimalCardProps & {
+export type AnimalDraggingCardProps = AnimalEditingCardProps & {
   dndName: string;
 };
 
@@ -15,5 +15,5 @@ export const AnimalDraggingCard: FC<AnimalDraggingCardProps> = ({ dndName, class
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   }));
 
-  return <AnimalCard className={cn(s.root, isDragging && s.isDragging, className)} {...props} ref={drag} />;
+  return <AnimalEditingCard className={cn(s.root, isDragging && s.isDragging, className)} {...props} ref={drag} />;
 };

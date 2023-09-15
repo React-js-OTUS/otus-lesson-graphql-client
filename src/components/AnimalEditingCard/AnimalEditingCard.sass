@@ -1,0 +1,21 @@
+@import src/styles/common
+
+.root
+  display: inline-flex
+  gap: 8px
+  align-items: center
+  padding: 12px 16px
+  border-radius: 12px
+  border: 0
+  +theme(background-color, mainBg)
+  +theme(box-shadow, boxShadow)
+  outline: none
+  transition: 0.3s
+  cursor: pointer
+  
+  &:hover,
+  &:focus
+    +theme(background-color, accent2Light)
+
+  &.isDragging
+    opacity: 0
