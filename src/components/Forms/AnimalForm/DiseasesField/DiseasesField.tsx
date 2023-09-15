@@ -27,6 +27,7 @@ export const DiseasesField = memo<DiseasesFieldProps>(
 
     return (
       <FormItem
+        required
         className={cn(s.root, className)}
         title={t(`forms.AnimalForm.diseases.title`)}
         validateStatus={validateStatus}

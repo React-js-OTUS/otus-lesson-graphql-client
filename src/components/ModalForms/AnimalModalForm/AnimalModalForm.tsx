@@ -30,6 +30,7 @@ export const AnimalModalForm: FC<AnimalModalFormProps> = ({ className, children 
       <Modal visible={visible} onClose={close} className={cn(s.root, className)}>
         <AnimalCompletedForm
           ref={form}
+          onSuccess={close}
           title={t`components.AnimalModalForm.add.title`}
           submitText={t`components.AnimalModalForm.add.submit`}
           successMessageText={t`components.AnimalModalForm.add.success`}

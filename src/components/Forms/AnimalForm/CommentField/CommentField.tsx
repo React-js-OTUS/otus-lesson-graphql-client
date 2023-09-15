@@ -7,7 +7,7 @@ import { getValidates } from 'src/utils/validation';
 import { AnimalFormProps, AnimalFormValues, FormHandlers } from '../types';
 import s from './CommentField.sass';
 
-export type CommentFieldProps = Pick<AnimalFormProps, 'className' | 'disabled' | 'autoFocusElement'> & {
+export type CommentFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'> & {
   submitCount: number;
   touched: boolean;
   errors: string;
@@ -18,7 +18,7 @@ export type CommentFieldProps = Pick<AnimalFormProps, 'className' | 'disabled' |
 };
 
 export const CommentField = memo<CommentFieldProps>(
-  ({ className, onChange, onBlur, onPressEnter, autoFocusElement, touched, value, errors, disabled, submitCount }) => {
+  ({ className, onChange, onBlur, onPressEnter, touched, value, errors, disabled, submitCount }) => {
     const { t } = useTranslation();
 
     const { validateStatus, help } = getValidates(errors, touched, submitCount);

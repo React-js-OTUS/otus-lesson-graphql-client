@@ -17,7 +17,9 @@ import {
   SetDoctorForAnimalVars,
 } from 'src/components/ManagePanel/connection';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
-import { message } from 'antd';
+import { Button, message } from 'antd';
+import { AnimalModalForm } from 'src/components/ModalForms/AnimalModalForm';
+import { PlusOutlined } from '@ant-design/icons';
 import { AnimalCards } from '../AnimalCards';
 import { UsersPanel, UsersPanelProps } from './UsersPanel';
 import s from './ManagePanel.sass';
@@ -75,7 +77,16 @@ export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className={cn(s.root, className)}>
-        <Title className={s.title}>{t`components.ManagePanel.convalescents`}</Title>
+        <Title className={cn(s.title, s.line)}>
+          <AnimalModalForm>
+            {({ open }) => (
+              <Button size="small" type="primary" onClick={() => open()}>
+                <PlusOutlined />
+              </Button>
+            )}
+          </AnimalModalForm>
+          {t`components.ManagePanel.convalescents`}
+        </Title>
         <AnimalDraggingCards
           dndName={DND_KEY}
           value={animalsByTypes.convalescents}

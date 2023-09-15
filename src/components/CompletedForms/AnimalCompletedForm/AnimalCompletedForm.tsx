@@ -1,7 +1,7 @@
 import React, { forwardRef, useMemo, useImperativeHandle } from 'react';
 import cn from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from '@apollo/client';
+import { FetchResult, useMutation } from '@apollo/client';
 import { FormikConfig, useFormik } from 'formik';
 import { AnimalForm, AnimalFormErrors, AnimalFormValues } from 'src/components/Forms';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
@@ -13,6 +13,7 @@ import s from './AnimalCompletedForm.sass';
 
 export type AnimalCompletedFormProps = {
   className?: string;
+  onSuccess?: (result: FetchResult<AddAnimalData>) => void;
   title: React.ReactNode;
   submitText: React.ReactNode;
   successMessageText: React.ReactNode;
@@ -32,7 +33,7 @@ const initialValues: AnimalFormValues = {
 };
 
 export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalCompletedFormProps>(
-  ({ className, successMessageText, submitText, title }, ref) => {
+  ({ className, successMessageText, submitText, onSuccess, title }, ref) => {
     const { t } = useTranslation();
     const [add, { loading }] = useMutation<AddAnimalData, AddAnimalVars>(ADD_ANIMAL);
 
@@ -47,7 +48,8 @@ export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalComp
       return {
         onSubmit: (values, { resetForm }) => {
           add({ variables: { input: values } })
-            .then(() => {
+            .then((res) => {
+              onSuccess?.(res);
               resetForm();
               message.success(successMessageText);
             })
@@ -61,10 +63,13 @@ export const AnimalCompletedForm = forwardRef<AnimalCompletedFormRef, AnimalComp
           if (isNotDefinedString(values.type)) {
             errors.type = t(`errors.is_required`);
           }
+          if (!values.diseaseIds?.length) {
+            errors.diseaseIds = t(`errors.is_required`);
+          }
           return errors;
         },
       };
-    }, [successMessageText, t, add]);
+    }, [t, add, onSuccess, successMessageText]);
 
     const formManager = useFormik<AnimalFormValues>({
       initialValues,
