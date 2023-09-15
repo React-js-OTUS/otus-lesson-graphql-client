@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import cn from 'clsx';
-import { Animal } from 'src/server.types';
+import { AnimalType } from 'src/server.types';
 import { feedbackDev } from 'src/utils/feedback';
 import Dog from './dog.svg';
 import Cat from './cat.svg';
@@ -9,19 +9,19 @@ import s from './AnimalIcon.sass';
 
 export type AnimalIconProps = {
   className?: string;
-  value: Animal['__typename'];
+  value: AnimalType;
 };
 
 export const AnimalIcon: FC<AnimalIconProps> = ({ className, value }) => {
   const res = (() => {
     switch (value) {
-      case 'Bird':
+      case AnimalType.Bird:
         return <Bird />;
 
-      case 'Cat':
+      case AnimalType.Cat:
         return <Cat />;
 
-      case 'Dog':
+      case AnimalType.Dog:
         return <Dog />;
 
       default: {
