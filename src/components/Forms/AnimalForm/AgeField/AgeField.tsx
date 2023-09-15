@@ -3,7 +3,7 @@ import cn from 'clsx';
 import { FormItem } from 'src/components/FormItem';
 import { getFieldCallbacks, getValidates } from 'src/utils/validation';
 import { IntInput } from 'src/components/Inputs';
-import { AnimalFormProps, AnimalFormValues, FormHandlers } from '../types';
+import { AnimalFormProps, AnimalFormValues, AnimalFormHandlers } from '../types';
 import s from './AgeField.sass';
 
 export type AgeFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'> & {
@@ -11,8 +11,8 @@ export type AgeFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'> & {
   touched: boolean;
   errors: string;
   value: AnimalFormValues['age'];
-  setFieldValue: FormHandlers['setFieldValue'];
-  setFieldTouched: FormHandlers['setFieldTouched'];
+  setFieldValue: AnimalFormHandlers['setFieldValue'];
+  setFieldTouched: AnimalFormHandlers['setFieldTouched'];
   title: React.ReactNode;
   placeholder: string;
   required: boolean;

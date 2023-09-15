@@ -13,4 +13,4 @@ export type MedicineFormProps = FormProps<MedicineFormValues> & {
   required?: MedicineFormRequired;
 };
 
-export type FormHandlers = FormikHandlers & FormikHelpers<MedicineFormValues>;
+export type MedicineFormHandlers = FormikHandlers & FormikHelpers<MedicineFormValues>;

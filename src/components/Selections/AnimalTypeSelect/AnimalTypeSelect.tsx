@@ -6,7 +6,7 @@ import { TextSelection } from 'src/components/TextSelection';
 import { createSelectByArray, getCleanData } from '../helpers';
 import s from './AnimalTypeSelect.sass';
 
-export type PracticeTagSelectProps = SelectProps<AnimalType[] | AnimalType>;
+export type AnimalTypeSelectProps = SelectProps<AnimalType[] | AnimalType>;
 
 const data = getCleanData<string>(AnimalType);
 

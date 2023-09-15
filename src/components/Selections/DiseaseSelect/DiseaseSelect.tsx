@@ -5,7 +5,7 @@ import { Disease } from 'src/server.types';
 import { TextSelection } from 'src/components/TextSelection';
 import s from './DiseaseSelect.sass';
 
-export type DiseasesSelectProps = SelectProps & {
+export type DiseaseSelectProps = SelectProps & {
   className?: string;
   items: Disease[];
   value: Disease['id'];
@@ -15,7 +15,7 @@ export type DiseasesSelectProps = SelectProps & {
   onChange: (value: Disease['id']) => void;
 };
 
-export const DiseaseSelect: FC<DiseasesSelectProps> = ({
+export const DiseaseSelect: FC<DiseaseSelectProps> = ({
   className,
   disabled,
   placeholder,

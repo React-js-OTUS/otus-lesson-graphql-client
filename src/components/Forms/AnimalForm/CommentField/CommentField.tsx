@@ -3,7 +3,7 @@ import cn from 'clsx';
 import { Input } from 'antd';
 import { FormItem } from 'src/components/FormItem';
 import { getValidates } from 'src/utils/validation';
-import { AnimalFormProps, AnimalFormValues, FormHandlers } from '../types';
+import { AnimalFormProps, AnimalFormValues, AnimalFormHandlers } from '../types';
 import s from './CommentField.sass';
 
 export type CommentFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'> & {
@@ -12,8 +12,8 @@ export type CommentFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'> 
   errors: string;
   value: AnimalFormValues['comment'];
   onPressEnter: () => void;
-  onChange: FormHandlers['handleChange'];
-  onBlur: FormHandlers['handleBlur'];
+  onChange: AnimalFormHandlers['handleChange'];
+  onBlur: AnimalFormHandlers['handleBlur'];
   title: React.ReactNode;
   placeholder: string;
   required: boolean;

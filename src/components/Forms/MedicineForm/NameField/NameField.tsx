@@ -3,7 +3,7 @@ import cn from 'clsx';
 import { Input } from 'antd';
 import { FormItem } from 'src/components/FormItem';
 import { getValidates } from 'src/utils/validation';
-import { MedicineFormProps, MedicineFormValues, FormHandlers } from '../types';
+import { MedicineFormProps, MedicineFormValues, MedicineFormHandlers } from '../types';
 import s from './NameField.sass';
 
 export type NameFieldProps = Pick<MedicineFormProps, 'className' | 'disabled' | 'autoFocusElement'> & {
@@ -12,8 +12,8 @@ export type NameFieldProps = Pick<MedicineFormProps, 'className' | 'disabled' | 
   errors: string;
   value: MedicineFormValues['name'];
   onPressEnter: () => void;
-  onChange: FormHandlers['handleChange'];
-  onBlur: FormHandlers['handleBlur'];
+  onChange: MedicineFormHandlers['handleChange'];
+  onBlur: MedicineFormHandlers['handleBlur'];
   title: React.ReactNode;
   placeholder: string;
   required: boolean;

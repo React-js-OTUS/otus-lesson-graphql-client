@@ -65,4 +65,4 @@ export const MedicineForm = memo<MedicineFormProps>(
   }
 );
 
-MedicineForm.displayName = 'EmailForm';
+MedicineForm.displayName = 'MedicineForm';

@@ -4,7 +4,7 @@ import { FormItem } from 'src/components/FormItem';
 import { getFieldCallbacks, getValidates } from 'src/utils/validation';
 import { DiseasesSelect } from 'src/components/Selections/DiseasesSelect';
 import { Disease } from 'src/server.types';
-import { AnimalFormProps, AnimalFormValues, FormHandlers } from '../types';
+import { AnimalFormProps, AnimalFormValues, AnimalFormHandlers } from '../types';
 import s from './DiseasesField.sass';
 
 export type DiseasesFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'> & {
@@ -13,8 +13,8 @@ export type DiseasesFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'>
   errors: string;
   items: Disease[];
   value: AnimalFormValues['diseaseIds'];
-  setFieldValue: FormHandlers['setFieldValue'];
-  setFieldTouched: FormHandlers['setFieldTouched'];
+  setFieldValue: AnimalFormHandlers['setFieldValue'];
+  setFieldTouched: AnimalFormHandlers['setFieldTouched'];
   title: React.ReactNode;
   placeholder: string;
   required: boolean;

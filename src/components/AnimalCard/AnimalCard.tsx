@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import cn from 'clsx';
-import { Animal } from 'src/server.types';
+import { Animal, AnimalType } from 'src/server.types';
 import { AnimalIcon } from 'src/components/AnimalIcon';
 import s from './AnimalCard.sass';
 
@@ -15,7 +15,7 @@ export const AnimalCard = forwardRef<AnimalCardRef, AnimalCardProps>(({ classNam
   if (!value) return null;
   return (
     <button ref={ref} {...props} type="button" className={cn(s.root, className)}>
-      <AnimalIcon value={value.__typename} />
+      <AnimalIcon value={value.__typename as AnimalType} />
       <div>{value.name || value.id}</div>
     </button>
   );
