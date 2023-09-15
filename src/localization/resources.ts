@@ -71,6 +71,7 @@ export const resources = {
           title: 'Cabinet',
           patients: 'My patients',
           table: 'Table',
+          empty: 'Empty',
           medicines: 'Medicines',
           success: 'Success!',
 
@@ -375,6 +376,7 @@ export const resources = {
           title: 'Кабинет',
           patients: 'Мои пациенты',
           table: 'Стол',
+          empty: 'Пусто',
           medicines: 'Лекарства',
           success: 'Успех!',
           healthy: 'Мои здоровые пациенты',
@@ -598,7 +600,7 @@ export const resources = {
           graphql: 'Graphql',
         },
         AnimalType: {
-          Cat: 'Код',
+          Cat: 'Кот',
           Dog: 'Пёс',
           Bird: 'Птица',
         },

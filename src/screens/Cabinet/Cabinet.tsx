@@ -83,7 +83,12 @@ export const Cabinet: FC = () => {
   return (
     <Page title={t`screens.Cabinet.title`} className={s.root}>
       <Title>{t`screens.Cabinet.patients`}</Title>
-      <AnimalCards onClick={onChooseAnimal} activeId={animal?.id} value={animalsByTypes.forDoctors} />
+      <AnimalCards
+        onClick={onChooseAnimal}
+        activeId={animal?.id}
+        value={animalsByTypes.forDoctors}
+        empty={t`screens.Cabinet.empty`}
+      />
       <div className={s.main}>
         <div className={s.table}>
           <Title>{t`screens.Cabinet.table`}</Title>
@@ -95,11 +100,16 @@ export const Cabinet: FC = () => {
             <MedicineModalAddForm>{({ open }) => <PlusOutlined onClick={() => open()} />}</MedicineModalAddForm>
           </div>
 
-          <MedicineDraggingCards className={s.medicines} value={medicines} dndName={dndName} />
+          <MedicineDraggingCards
+            className={s.medicines}
+            value={medicines}
+            dndName={dndName}
+            empty={t`screens.Cabinet.empty`}
+          />
         </div>
       </div>
       <Title>{t`screens.Cabinet.healthy`}</Title>
-      <AnimalEditingCards value={animalsByTypes.healthy} />
+      <AnimalEditingCards value={animalsByTypes.healthy} empty={t`screens.Cabinet.empty`} />
     </Page>
   );
 };
