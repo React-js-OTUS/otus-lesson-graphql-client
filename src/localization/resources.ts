@@ -130,6 +130,20 @@ export const resources = {
             placeholder: 'Enter diseases',
           },
         },
+        DiseaseForm: {
+          name: {
+            title: 'Name',
+            placeholder: 'Enter name',
+          },
+          desc: {
+            title: 'Description',
+            placeholder: 'Enter description',
+          },
+          type: {
+            title: 'Type',
+            placeholder: 'Enter type',
+          },
+        },
         ProfileForm: {
           nickname: {
             title: 'Nickname',
@@ -181,6 +195,9 @@ export const resources = {
         AnimalTypeSelect: {
           placeholder: 'Choose the type of animal',
         },
+        DiseaseTypeSelect: {
+          placeholder: 'Choose the type of disease',
+        },
         RemoveButton: {
           title: 'Data will be lost, delete?',
           ok: 'Remove',
@@ -231,6 +248,12 @@ export const resources = {
           Cat: 'cat',
           Dog: 'dog',
           Bird: 'bird',
+        },
+        DiseaseType: {
+          Broken: 'broken',
+          Cold: 'cold',
+          Stomach: 'stomach',
+          Parasites: 'parasites',
         },
       },
     },
@@ -363,6 +386,20 @@ export const resources = {
             placeholder: 'Укажите заболевания',
           },
         },
+        DiseaseForm: {
+          name: {
+            title: 'Название',
+            placeholder: 'Укажите название',
+          },
+          desc: {
+            title: 'Описание',
+            placeholder: 'Укажите описание',
+          },
+          type: {
+            title: 'Тип',
+            placeholder: 'Укажите тип',
+          },
+        },
         ProfileForm: {
           nickname: {
             title: 'Псевдоним',
@@ -414,6 +451,9 @@ export const resources = {
         AnimalTypeSelect: {
           placeholder: 'Выберите тип животного',
         },
+        DiseaseTypeSelect: {
+          placeholder: 'Выберите тип заболевания',
+        },
         RemoveButton: {
           title: 'Данные будут потеряны, удалить?',
           ok: 'Удалить',
@@ -464,6 +504,12 @@ export const resources = {
           Cat: 'Код',
           Dog: 'Пёс',
           Bird: 'Птица',
+        },
+        DiseaseType: {
+          Broken: 'Перелом',
+          Cold: 'Переохлаждение',
+          Stomach: 'Желудок',
+          Parasites: 'Паразиты',
         },
       },
     },
