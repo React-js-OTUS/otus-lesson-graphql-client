@@ -11,6 +11,7 @@ const getWithSpinSuspense = getWithSuspense(<SpinLoading />);
 
 const homeScreen = getWithPageSuspense(lazy(() => import('../screens/Home')));
 const settingsScreen = getWithPageSuspense(lazy(() => import('../screens/Settings')));
+const cabinetScreen = getWithPageSuspense(lazy(() => import('../screens/Cabinet')));
 const profileScreen = getWithPageSuspense(lazy(() => import('../screens/ProfileScreen')));
 const authScreen = getWithSpinSuspense(lazy(() => import('../screens/AuthScreen')));
 const notFoundScreen = getWithSpinSuspense(lazy(() => import('../screens/NotFound')));
@@ -20,6 +21,7 @@ const Main: FC = () => (
     <Route index element={homeScreen} />
     <Route path="profile" element={profileScreen} />
     <Route path="settings" element={settingsScreen} />
+    <Route path="cabinet" element={cabinetScreen} />
     <Route path="*" element={notFoundScreen} />
   </Routes>
 );

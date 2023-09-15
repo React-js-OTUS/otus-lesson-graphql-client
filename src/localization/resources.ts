@@ -67,6 +67,9 @@ export const resources = {
         },
         Cabinet: {
           title: 'Cabinet',
+          patients: 'My patients',
+          table: 'Table',
+          healthy: 'My healthy patients',
         },
         TeachersScreen: {
           title: 'Teachers',
@@ -359,6 +362,9 @@ export const resources = {
         },
         Cabinet: {
           title: 'Кабинет',
+          patients: 'Мои пациенты',
+          table: 'Стол',
+          healthy: 'Мои здоровые пациенты',
         },
         TeachersScreen: {
           title: 'Преподаватели',

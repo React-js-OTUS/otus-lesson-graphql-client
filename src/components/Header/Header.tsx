@@ -48,6 +48,19 @@ export const HeaderOrigin = memo<HeaderOriginProps>(({ className, t }) => {
           ),
         },
         {
+          key: '/cabinet',
+          horizontalElem: (
+            <NavLink className={horClassName} to="/cabinet">
+              {t(`components.header.cabinet`)}
+            </NavLink>
+          ),
+          verticalElem: (
+            <NavLink className={verClassName} to="/cabinet">
+              {t(`components.header.cabinet`)}
+            </NavLink>
+          ),
+        },
+        {
           key: '/profile',
           horizontalElem: (
             <NavLink className={horClassName} to="/profile">
