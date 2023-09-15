@@ -186,6 +186,26 @@ export const resources = {
           success: 'The patient has been successfully updated',
           submit: 'Save',
         },
+        MedicineModalAddForm: {
+          title: 'Add a medicine',
+          success: 'Medicine successfully added',
+          submit: 'Add',
+        },
+        MedicineModalUpdateForm: {
+          title: 'Edit a medicine',
+          success: 'The medicine has been successfully updated',
+          submit: 'Save',
+        },
+        DiseaseModalAddForm: {
+          title: 'Add a disease',
+          success: 'Disease successfully added',
+          submit: 'Add',
+        },
+        DiseaseModalUpdateForm: {
+          title: 'Edit a disease',
+          success: 'The disease has been successfully updated',
+          submit: 'Save',
+        },
         ManagePanel: {
           convalescents: 'Convalescents',
           doctors: 'Doctors',
@@ -440,6 +460,26 @@ export const resources = {
         AnimalModalUpdateForm: {
           title: 'Редактировать пациента',
           success: 'Пациент успешно обновлен',
+          submit: 'Сохранить',
+        },
+        MedicineModalAddForm: {
+          title: 'Добавить лекарство',
+          success: 'Лекарство успешно добавлено',
+          submit: 'Добавить',
+        },
+        MedicineModalUpdateForm: {
+          title: 'Редактировать лекарство',
+          success: 'Лекарство успешно обновлено',
+          submit: 'Сохранить',
+        },
+        DiseaseModalAddForm: {
+          title: 'Добавить заболевание',
+          success: 'Заболевание успешно добавлено',
+          submit: 'Добавить',
+        },
+        DiseaseModalUpdateForm: {
+          title: 'Редактировать заболевание',
+          success: 'Заболевание успешно обновлено',
           submit: 'Сохранить',
         },
         ManagePanel: {
