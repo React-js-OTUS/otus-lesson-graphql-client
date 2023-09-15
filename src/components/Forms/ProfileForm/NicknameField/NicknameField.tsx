@@ -3,7 +3,6 @@ import cn from 'clsx';
 import { Input } from 'antd';
 import { FormikHandlers } from 'formik/dist/types';
 import { UserOutlined } from '@ant-design/icons';
-import { useTranslation } from 'react-i18next';
 import { FormItem } from 'src/components/FormItem';
 import { getValidates } from 'src/utils/validation';
 import { ProfileFormProps } from '../types';
@@ -16,35 +15,40 @@ export type NameFieldProps = Pick<ProfileFormProps, 'className' | 'disabled' | '
   value: string;
   onChange: FormikHandlers['handleChange'];
   onBlur: FormikHandlers['handleBlur'];
+  title: React.ReactNode;
+  placeholder: string;
 };
 
 const prefix = <UserOutlined />;
 
 export const NicknameField = memo<NameFieldProps>(
-  ({ className, onChange, onBlur, autoFocusElement, touched, value, errors, disabled, submitCount }) => {
-    const { t } = useTranslation();
-
+  ({
+    className,
+    onChange,
+    title,
+    placeholder,
+    onBlur,
+    autoFocusElement,
+    touched,
+    value,
+    errors,
+    disabled,
+    submitCount,
+  }) => {
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem
-        className={cn(s.root, className)}
-        title={t(`forms.ProfileForm.nickname.title`)}
-        required
-        validateStatus={validateStatus}
-        help={help}
-      >
+      <FormItem className={cn(s.root, className)} title={title} required validateStatus={validateStatus} help={help}>
         <Input
           prefix={prefix}
           disabled={disabled}
           ref={autoFocusElement}
-          data-cy="input"
           autoFocus
           name="nickname"
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          placeholder={t(`forms.ProfileForm.nickname.placeholder`)}
+          placeholder={placeholder}
         />
       </FormItem>
     );
