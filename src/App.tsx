@@ -3,6 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './localization';
 import { ClientProvider, SubscriptionsListener } from 'src/client';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
 import { LocalizationInitiator } from './localization/LocalizationInitiator';
 import { Navigation } from './navigation/Navigation';
 import { store } from './store';
@@ -21,9 +23,11 @@ function App() {
           <SubscriptionsListener />
           <LocalizationInitiator />
           <ThemeProvider>
-            <Layout>
-              <Navigation />
-            </Layout>
+            <DndProvider backend={HTML5Backend}>
+              <Layout>
+                <Navigation />
+              </Layout>
+            </DndProvider>
           </ThemeProvider>
         </Provider>
       </ClientProvider>

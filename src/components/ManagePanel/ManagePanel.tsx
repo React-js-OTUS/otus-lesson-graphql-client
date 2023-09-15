@@ -4,8 +4,6 @@ import { AnimalDraggingCards } from 'src/components/AnimalDraggingCards';
 import { useSelector } from 'react-redux';
 import { animalsSelectors } from 'src/store/animals';
 import { usersSelectors } from 'src/store/users';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { DndProvider } from 'react-dnd';
 import { profileSelectors } from 'src/store/profile';
 import { Animal, User } from 'src/server.types';
 import { Title } from 'src/components/Title';
@@ -66,34 +64,32 @@ export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
   }, [animals]);
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className={cn(s.root, className)}>
-        <Title className={cn(s.title, s.line)}>
-          <AnimalModalAddForm>
-            {({ open }) => (
-              <Button size="small" type="primary" onClick={() => open()}>
-                <PlusOutlined />
-              </Button>
-            )}
-          </AnimalModalAddForm>
-          {t`components.ManagePanel.convalescents`}
-        </Title>
-        <AnimalDraggingCards
-          dndName={DND_KEY}
-          value={animalsByTypes.convalescents}
-          empty={t`components.ManagePanel.empty`}
-        />
-        <Title className={s.title}>{t`components.ManagePanel.doctors`}</Title>
-        <UsersPanel
-          canDrop={canDrop}
-          dndName={DND_KEY}
-          animals={animalsByTypes.forDoctors}
-          value={users}
-          onTake={onTake}
-        />
-        <Title className={s.title}>{t`components.ManagePanel.healthy`}</Title>
-        <AnimalEditingCards value={animalsByTypes.healthy} empty={t`components.ManagePanel.empty`} />
-      </div>
-    </DndProvider>
+    <div className={cn(s.root, className)}>
+      <Title className={cn(s.title, s.line)}>
+        <AnimalModalAddForm>
+          {({ open }) => (
+            <Button size="small" type="primary" onClick={() => open()}>
+              <PlusOutlined />
+            </Button>
+          )}
+        </AnimalModalAddForm>
+        {t`components.ManagePanel.convalescents`}
+      </Title>
+      <AnimalDraggingCards
+        dndName={DND_KEY}
+        value={animalsByTypes.convalescents}
+        empty={t`components.ManagePanel.empty`}
+      />
+      <Title className={s.title}>{t`components.ManagePanel.doctors`}</Title>
+      <UsersPanel
+        canDrop={canDrop}
+        dndName={DND_KEY}
+        animals={animalsByTypes.forDoctors}
+        value={users}
+        onTake={onTake}
+      />
+      <Title className={s.title}>{t`components.ManagePanel.healthy`}</Title>
+      <AnimalEditingCards value={animalsByTypes.healthy} empty={t`components.ManagePanel.empty`} />
+    </div>
   );
 };
