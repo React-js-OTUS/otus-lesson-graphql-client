@@ -7,12 +7,21 @@ import { useSelector } from 'react-redux';
 import { diseasesSelectors } from 'src/store/diseases';
 import { DiseasesField } from 'src/components/Forms/AnimalForm/DiseasesField';
 import { useTranslation } from 'react-i18next';
-import { AnimalFormProps } from './types';
+import { AnimalFormProps, AnimalFormRequired } from './types';
 import { NameField } from './NameField';
 import s from './AnimalForm.sass';
 
+const defaultRequired: AnimalFormRequired = {
+  name: true,
+  type: true,
+  diseaseIds: true,
+  comment: false,
+  doctorId: false,
+  age: false,
+};
+
 export const AnimalForm = memo<AnimalFormProps>(
-  ({ className, formManager, formElement, autoFocusElement, disabled }) => {
+  ({ className, formManager, required = defaultRequired, formElement, autoFocusElement, disabled }) => {
     const {
       values,
       touched,
@@ -32,6 +41,7 @@ export const AnimalForm = memo<AnimalFormProps>(
     return (
       <form ref={formElement} onSubmit={handleSubmit} className={cn(s.root, className)}>
         <NameField
+          required={required.name}
           title={t(`forms.AnimalForm.name.title`)}
           placeholder={t(`forms.AnimalForm.name.placeholder`)}
           onPressEnter={submitForm}
@@ -45,6 +55,7 @@ export const AnimalForm = memo<AnimalFormProps>(
           disabled={disabled}
         />
         <AnimalTypeField
+          required={required.type}
           title={t(`forms.AnimalForm.type.title`)}
           placeholder={t(`forms.AnimalForm.type.placeholder`)}
           setFieldTouched={setFieldTouched}
@@ -56,6 +67,7 @@ export const AnimalForm = memo<AnimalFormProps>(
           disabled={disabled}
         />
         <DiseasesField
+          required={required.diseaseIds}
           title={t(`forms.AnimalForm.diseases.title`)}
           placeholder={t(`forms.AnimalForm.diseases.placeholder`)}
           items={diseases}
@@ -68,6 +80,7 @@ export const AnimalForm = memo<AnimalFormProps>(
           disabled={disabled}
         />
         <AgeField
+          required={required.age}
           title={t(`forms.AnimalForm.age.title`)}
           placeholder={t(`forms.AnimalForm.age.placeholder`)}
           setFieldTouched={setFieldTouched}
@@ -79,6 +92,7 @@ export const AnimalForm = memo<AnimalFormProps>(
           disabled={disabled}
         />
         <CommentField
+          required={required.comment}
           title={t(`forms.AnimalForm.comment.title`)}
           placeholder={t(`forms.AnimalForm.comment.placeholder`)}
           onPressEnter={submitForm}

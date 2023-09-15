@@ -16,6 +16,7 @@ export type NameFieldProps = Pick<AnimalFormProps, 'className' | 'disabled' | 'a
   onBlur: FormHandlers['handleBlur'];
   title: React.ReactNode;
   placeholder: string;
+  required: boolean;
 };
 
 export const NameField = memo<NameFieldProps>(
@@ -31,12 +32,19 @@ export const NameField = memo<NameFieldProps>(
     value,
     errors,
     disabled,
+    required,
     submitCount,
   }) => {
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem className={cn(s.root, className)} title={title} required validateStatus={validateStatus} help={help}>
+      <FormItem
+        className={cn(s.root, className)}
+        title={title}
+        required={required}
+        validateStatus={validateStatus}
+        help={help}
+      >
         <Input
           disabled={disabled}
           ref={autoFocusElement}

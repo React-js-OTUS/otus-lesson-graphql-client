@@ -17,6 +17,7 @@ export type DiseasesFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'>
   setFieldTouched: FormHandlers['setFieldTouched'];
   title: React.ReactNode;
   placeholder: string;
+  required: boolean;
 };
 
 export const DiseasesField = memo<DiseasesFieldProps>(
@@ -32,12 +33,19 @@ export const DiseasesField = memo<DiseasesFieldProps>(
     errors,
     disabled,
     submitCount,
+    required,
   }) => {
     const { onBlur, onChange } = getFieldCallbacks('diseaseIds', { setFieldTouched, setFieldValue });
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem required className={cn(s.root, className)} title={title} validateStatus={validateStatus} help={help}>
+      <FormItem
+        required={required}
+        className={cn(s.root, className)}
+        title={title}
+        validateStatus={validateStatus}
+        help={help}
+      >
         <DiseasesSelect
           disabled={disabled}
           onChange={onChange}

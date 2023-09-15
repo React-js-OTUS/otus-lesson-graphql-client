@@ -15,6 +15,7 @@ export type AgeFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'> & {
   setFieldTouched: FormHandlers['setFieldTouched'];
   title: React.ReactNode;
   placeholder: string;
+  required: boolean;
 };
 
 export const AgeField = memo<AgeFieldProps>(
@@ -29,12 +30,19 @@ export const AgeField = memo<AgeFieldProps>(
     errors,
     disabled,
     submitCount,
+    required,
   }) => {
     const { onBlur, onChange } = getFieldCallbacks('age', { setFieldTouched, setFieldValue });
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem className={cn(s.root, className)} title={title} validateStatus={validateStatus} help={help}>
+      <FormItem
+        required={required}
+        className={cn(s.root, className)}
+        title={title}
+        validateStatus={validateStatus}
+        help={help}
+      >
         <IntInput
           min={0}
           disabled={disabled}

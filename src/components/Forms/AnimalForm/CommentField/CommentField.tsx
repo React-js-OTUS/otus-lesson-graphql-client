@@ -16,6 +16,7 @@ export type CommentFieldProps = Pick<AnimalFormProps, 'className' | 'disabled'> 
   onBlur: FormHandlers['handleBlur'];
   title: React.ReactNode;
   placeholder: string;
+  required: boolean;
 };
 
 export const CommentField = memo<CommentFieldProps>(
@@ -31,11 +32,18 @@ export const CommentField = memo<CommentFieldProps>(
     errors,
     disabled,
     submitCount,
+    required,
   }) => {
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem className={cn(s.root, className)} title={title} validateStatus={validateStatus} help={help}>
+      <FormItem
+        required={required}
+        className={cn(s.root, className)}
+        title={title}
+        validateStatus={validateStatus}
+        help={help}
+      >
         <Input.TextArea
           disabled={disabled}
           onPressEnter={onPressEnter}

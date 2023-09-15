@@ -7,6 +7,10 @@ export type AnimalFormValues = AnimalUpdateInput;
 export type AnimalFormErrors = Record<keyof AnimalFormValues, string>;
 export type AnimalFormTouched = Record<keyof AnimalFormValues, boolean>;
 
-export type AnimalFormProps = FormProps<AnimalFormValues>;
+export type AnimalFormRequired = Record<keyof AnimalFormValues, boolean>;
+
+export type AnimalFormProps = FormProps<AnimalFormValues> & {
+  required?: AnimalFormRequired;
+};
 
 export type FormHandlers = FormikHandlers & FormikHelpers<AnimalUpdateInput>;
