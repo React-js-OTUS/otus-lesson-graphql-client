@@ -3,7 +3,6 @@ import cn from 'clsx';
 import { Input } from 'antd';
 import { FormikHandlers } from 'formik/dist/types';
 import { UserOutlined } from '@ant-design/icons';
-import { useTranslation } from 'react-i18next';
 import { FormItem } from 'src/components/FormItem';
 import { getValidates } from 'src/utils/validation';
 import { EmailFormProps } from '../types';
@@ -17,24 +16,31 @@ export type EmailFieldProps = Pick<EmailFormProps, 'className' | 'disabled' | 'a
   onPressEnter: () => void;
   onChange: FormikHandlers['handleChange'];
   onBlur: FormikHandlers['handleBlur'];
+  title: React.ReactNode;
+  placeholder: string;
 };
 
 const prefix = <UserOutlined />;
 
 export const EmailField = memo<EmailFieldProps>(
-  ({ className, onChange, onBlur, onPressEnter, autoFocusElement, touched, value, errors, disabled, submitCount }) => {
-    const { t } = useTranslation();
-
+  ({
+    className,
+    onChange,
+    title,
+    placeholder,
+    onBlur,
+    onPressEnter,
+    autoFocusElement,
+    touched,
+    value,
+    errors,
+    disabled,
+    submitCount,
+  }) => {
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
-      <FormItem
-        className={cn(s.root, className)}
-        title={t(`forms.EmailForm.email.title`)}
-        required
-        validateStatus={validateStatus}
-        help={help}
-      >
+      <FormItem className={cn(s.root, className)} title={title} required validateStatus={validateStatus} help={help}>
         <Input
           prefix={prefix}
           disabled={disabled}
@@ -47,7 +53,7 @@ export const EmailField = memo<EmailFieldProps>(
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          placeholder={t(`forms.EmailForm.email.placeholder`)}
+          placeholder={placeholder}
         />
       </FormItem>
     );
