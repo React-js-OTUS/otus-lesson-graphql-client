@@ -30,8 +30,6 @@ export const AnimalInfoCard = forwardRef<AnimalInfoCardRef, AnimalInfoCardProps>
       type: value.__typename as AnimalType,
     }))();
 
-    console.log(value.diseases);
-
     return (
       <div ref={ref} {...props} className={cn(s.root, className)}>
         <div className={s.top}>

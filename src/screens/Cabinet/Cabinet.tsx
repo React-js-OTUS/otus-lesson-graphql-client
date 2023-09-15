@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/client';
 import { AnimalCards } from 'src/components/AnimalCards';
 import { AnimalEditingCards } from 'src/components/AnimalEditingCards';
 import { AnimalInfoCard } from 'src/components/AnimalInfoCard';
+import deepEqual from 'fast-deep-equal';
 import { TO_HEAL_ANIMAL, ToHealAnimalData, ToHealAnimalVars } from './connection';
 import s from './Cabinet.sass';
 
@@ -45,6 +46,14 @@ export const Cabinet: FC = () => {
 
   useEffect(() => {
     if (!animalsByTypes.forDoctors.find((i) => i.id === animal?.id)) setAnimal(null);
+  }, [animalsByTypes.forDoctors, animal]);
+
+  useEffect(() => {
+    const found = animalsByTypes.forDoctors.find((i) => i.id === animal?.id);
+    setAnimal((v) => {
+      if (!deepEqual(found, v)) return found;
+      return v;
+    });
   }, [animalsByTypes.forDoctors, animal]);
 
   const onChooseAnimal = (value: Animal) => {
