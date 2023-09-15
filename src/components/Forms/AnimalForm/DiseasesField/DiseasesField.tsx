@@ -22,7 +22,7 @@ export const DiseasesField = memo<DiseasesFieldProps>(
   ({ className, setFieldValue, setFieldTouched, touched, items, value, errors, disabled, submitCount }) => {
     const { t } = useTranslation();
 
-    const { onBlur, onChange } = getFieldCallbacks('age', { setFieldTouched, setFieldValue });
+    const { onBlur, onChange } = getFieldCallbacks('diseaseIds', { setFieldTouched, setFieldValue });
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
     return (
