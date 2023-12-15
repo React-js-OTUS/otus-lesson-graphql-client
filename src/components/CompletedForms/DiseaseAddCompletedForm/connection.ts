@@ -2,13 +2,7 @@ import { gql } from '@apollo/client';
 import { Mutation, MutationAddDiseaseArgs } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
 
-export const ADD_DISEASE = gql`
-  mutation addDisease($input: DiseaseInput!) {
-    addDisease(input: $input) {
-      id
-    }
-  }
-`;
+export const ADD_DISEASE = gql``;
 
 export type AddDiseaseData = Pick<Mutation, 'addDisease'>;
 export type AddDiseaseVars = MutationAddDiseaseArgs;

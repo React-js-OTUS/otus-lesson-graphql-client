@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { animalsSelectors } from 'src/store/animals';
 import { medicinesSelectors } from 'src/store/medicines';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
-import { Button, message } from 'antd';
+import { message } from 'antd';
 import { Animal, Medicine } from 'src/server.types';
 import { useMutation } from '@apollo/client';
 import { AnimalCards } from 'src/components/AnimalCards';

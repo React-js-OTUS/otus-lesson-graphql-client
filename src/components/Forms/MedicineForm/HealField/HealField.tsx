@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { FormItem } from 'src/components/FormItem';
 import { getFieldCallbacks, getValidates } from 'src/utils/validation';
-import { Disease } from 'src/server.types';
 import { DiseaseTypeSelect } from 'src/components/Selections';
 import { MedicineFormProps, MedicineFormValues, MedicineFormHandlers } from '../types';
 import s from './HealField.sass';

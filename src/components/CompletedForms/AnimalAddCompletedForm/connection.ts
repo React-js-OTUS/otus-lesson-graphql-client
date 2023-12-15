@@ -2,21 +2,7 @@ import { gql } from '@apollo/client';
 import { Mutation, MutationAddAnimalArgs } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
 
-export const ADD_ANIMAL = gql`
-  mutation addAnimal($input: AnimalAddInput!) {
-    addAnimal(input: $input) {
-      ... on Cat {
-        id
-      }
-      ... on Dog {
-        id
-      }
-      ... on Bird {
-        id
-      }
-    }
-  }
-`;
+export const ADD_ANIMAL = gql``;
 
 export type AddAnimalData = Pick<Mutation, 'addAnimal'>;
 export type AddAnimalVars = MutationAddAnimalArgs;

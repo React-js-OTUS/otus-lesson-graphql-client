@@ -7,12 +7,12 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  Date: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  Date: { input: any; output: any };
 };
 
 export type Animal = Bird | Cat | Dog;
@@ -29,7 +29,7 @@ export type AnimalAddInput = {
 export enum AnimalType {
   Bird = 'Bird',
   Cat = 'Cat',
-  Dog = 'Dog'
+  Dog = 'Dog',
 }
 
 export type AnimalUpdateInput = {
@@ -91,7 +91,7 @@ export enum DiseaseType {
   Broken = 'broken',
   Cold = 'cold',
   Parasites = 'parasites',
-  Stomach = 'stomach'
+  Stomach = 'stomach',
 }
 
 export type Dog = {
@@ -128,21 +128,17 @@ export type Mutation = {
   updateMedicine: Medicine;
 };
 
-
 export type MutationAddAnimalArgs = {
   input: AnimalAddInput;
 };
-
 
 export type MutationAddDiseaseArgs = {
   input: DiseaseInput;
 };
 
-
 export type MutationAddMedicineArgs = {
   input: MedicineInput;
 };
-
 
 export type MutationUpdateAnimalArgs = {
   id: Scalars['ID']['input'];
@@ -150,12 +146,10 @@ export type MutationUpdateAnimalArgs = {
   partial?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-
 export type MutationUpdateDiseaseArgs = {
   id: Scalars['ID']['input'];
   input: DiseaseInput;
 };
-
 
 export type MutationUpdateMedicineArgs = {
   id: Scalars['ID']['input'];
@@ -177,18 +171,15 @@ export type ProfileMutations = {
   update: Profile;
 };
 
-
 export type ProfileMutationsSigninArgs = {
   nickname: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
-
 export type ProfileMutationsSignupArgs = {
   nickname: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
-
 
 export type ProfileMutationsUpdateArgs = {
   input: UpdateProfileInput;
@@ -198,7 +189,6 @@ export type ProfilePasswordMutations = {
   __typename?: 'ProfilePasswordMutations';
   change: ResetPassword;
 };
-
 
 export type ProfilePasswordMutationsChangeArgs = {
   input: ChangePasswordInput;

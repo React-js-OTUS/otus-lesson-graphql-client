@@ -1,99 +1,15 @@
 import { gql } from '@apollo/client';
 
-export const PROFILE_FRAGMENT = gql`
-  fragment Profile on Profile {
-    id
-    nickname
-    signUpDate
-  }
-`;
+export const PROFILE_FRAGMENT = gql``;
 
-export const USER_FRAGMENT = gql`
-  fragment User on User {
-    id
-    nickname
-    signUpDate
-  }
-`;
+export const USER_FRAGMENT = gql``;
 
-export const MEDICINE_FRAGMENT = gql`
-  fragment Medicine on Medicine {
-    id
-    name
-    heal
-  }
-`;
+export const MEDICINE_FRAGMENT = gql``;
 
-export const DISEASE_FRAGMENT = gql`
-  fragment Disease on Disease {
-    id
-    name
-    type
-  }
-`;
+export const DISEASE_FRAGMENT = gql``;
 
-export const DOG_FRAGMENT = gql`
-  fragment Dog on Dog {
-    id
-    name
-    age
-    comment
-    doctor {
-      id
-    }
-    diseases {
-      ...Disease
-    }
-    updatedAt
-  }
-  ${DISEASE_FRAGMENT}
-`;
+export const DOG_FRAGMENT = gql``;
 
-export const CAT_FRAGMENT = gql`
-  fragment Cat on Cat {
-    id
-    name
-    age
-    comment
-    doctor {
-      id
-    }
-    diseases {
-      ...Disease
-    }
-    updatedAt
-  }
-  ${DISEASE_FRAGMENT}
-`;
-export const BIRD_FRAGMENT = gql`
-  fragment Bird on Bird {
-    id
-    name
-    age
-    comment
-    doctor {
-      id
-    }
-    diseases {
-      ...Disease
-    }
-    updatedAt
-  }
-  ${DISEASE_FRAGMENT}
-`;
-export const ANIMAL_FRAGMENT = gql`
-  fragment Animal on Animal {
-    ... on Cat {
-      ...Cat
-    }
-    ... on Dog {
-      ...Dog
-    }
-    ... on Bird {
-      ...Bird
-    }
-  }
-  ${DOG_FRAGMENT}
-  ${CAT_FRAGMENT}
-  ${BIRD_FRAGMENT}
-`;
+export const CAT_FRAGMENT = gql``;
+export const BIRD_FRAGMENT = gql``;
+export const ANIMAL_FRAGMENT = gql``;
