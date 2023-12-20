@@ -2,11 +2,8 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from 'src/components/Page';
 import { Title } from 'src/components/Title';
-import { useSelector } from 'react-redux';
-import { animalsSelectors } from 'src/store/animals';
-import { medicinesSelectors } from 'src/store/medicines';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
-import { Button, message } from 'antd';
+import { message } from 'antd';
 import { Animal, Medicine } from 'src/server.types';
 import { useMutation } from '@apollo/client';
 import { AnimalCards } from 'src/components/AnimalCards';
@@ -16,14 +13,14 @@ import { AnimalDropInfoCard } from 'src/components/AnimalDropInfoCard';
 import { MedicineDraggingCards } from 'src/components/MedicineDraggingCards';
 import { PlusOutlined } from '@ant-design/icons';
 import { MedicineModalAddForm } from 'src/components/ModalForms';
+import { useStore } from 'src/client/StoreProvider';
 import { TO_HEAL_ANIMAL, ToHealAnimalData, ToHealAnimalVars } from './connection';
 import s from './Cabinet.sass';
 
 const dndName = 'cabinet-table';
 export const Cabinet: FC = () => {
   const { t } = useTranslation();
-  const animals = useSelector(animalsSelectors.get);
-  const medicines = useSelector(medicinesSelectors.get);
+  const { medicines, animals } = useStore();
   const [animal, setAnimal] = useState<Animal>();
   const [updateAnimal] = useMutation<ToHealAnimalData, ToHealAnimalVars>(TO_HEAL_ANIMAL);
 

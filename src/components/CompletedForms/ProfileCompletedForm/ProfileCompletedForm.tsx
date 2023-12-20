@@ -3,13 +3,12 @@ import cn from 'clsx';
 import { FormikConfig, useFormik } from 'formik';
 import { useMutation } from '@apollo/client';
 import { Button, message } from 'antd';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ProfileForm, ProfileFormValues, ProfileFormErrors } from 'src/components/Forms/ProfileForm';
 import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { isNotDefinedString } from 'src/utils/validation';
-import { profileSelectors } from 'src/store/profile';
 import { Title } from 'src/components/Title';
+import { useStore } from 'src/client/StoreProvider';
 import { UPDATE_PROFILE, UpdateProfileResponse, UpdateProfileVars } from './connection';
 import s from './ProfileCompletedForm.sass';
 
@@ -22,7 +21,7 @@ export type ProfileCompletedFormProps = {
 
 export const ProfileCompletedForm = memo<ProfileCompletedFormProps>(
   ({ className, title, successMessageText, submitText }) => {
-    const profile = useSelector(profileSelectors.get);
+    const { profile } = useStore();
     const { t } = useTranslation();
     const [update, { loading }] = useMutation<UpdateProfileResponse, UpdateProfileVars>(UPDATE_PROFILE);
 

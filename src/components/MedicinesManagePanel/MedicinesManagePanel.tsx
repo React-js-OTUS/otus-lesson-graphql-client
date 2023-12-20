@@ -6,8 +6,7 @@ import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { MedicinesEditingCards } from 'src/components/MedicinesEditingCards';
-import { useSelector } from 'react-redux';
-import { medicinesSelectors } from 'src/store/medicines';
+import { useStore } from 'src/client/StoreProvider';
 import s from './MedicinesManagePanel.sass';
 
 export type MedicinesManagePanelProps = {
@@ -16,7 +15,7 @@ export type MedicinesManagePanelProps = {
 
 export const MedicinesManagePanel: FC<MedicinesManagePanelProps> = ({ className }) => {
   const { t } = useTranslation();
-  const medicines = useSelector(medicinesSelectors.get);
+  const { medicines } = useStore();
 
   return (
     <div className={cn(s.root, className)}>
