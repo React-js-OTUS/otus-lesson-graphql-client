@@ -1,10 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import cn from 'clsx';
 import { AnimalDraggingCards } from 'src/components/AnimalDraggingCards';
-import { useSelector } from 'react-redux';
-import { animalsSelectors } from 'src/store/animals';
-import { usersSelectors } from 'src/store/users';
-import { profileSelectors } from 'src/store/profile';
 import { Animal, User } from 'src/server.types';
 import { Title } from 'src/components/Title';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +14,7 @@ import { createErrorHandlers } from 'src/utils/createErrorHandlers';
 import { Button, message } from 'antd';
 import { AnimalModalAddForm } from 'src/components/ModalForms/AnimalModalAddForm';
 import { PlusOutlined } from '@ant-design/icons';
+import { useStore } from 'src/client/StoreProvider';
 import { AnimalEditingCards } from '../AnimalEditingCards';
 import { UsersPanel, UsersPanelProps } from './UsersPanel';
 import s from './ManagePanel.sass';
@@ -30,10 +27,9 @@ const DND_KEY = 'manage-panel';
 
 export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
   const { t } = useTranslation();
+  const { users, profile, animals } = useStore();
+
   const [updateAnimal] = useMutation<SetDoctorForAnimalData, SetDoctorForAnimalVars>(SET_DOCTOR_FOR_ANIMAL);
-  const animals = useSelector(animalsSelectors.get);
-  const users = useSelector(usersSelectors.get);
-  const profile = useSelector(profileSelectors.get);
   const { catcher } = createErrorHandlers((code, _, error) => {
     if (code === null) {
       message.error(t(`errors.${error.message}`));

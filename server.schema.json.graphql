@@ -3,27 +3,78 @@
 schema {
     query: Query
     mutation: Mutation
+    subscription: Subscription
 }
+
+union Animal = Bird | Cat | Dog
 
 type AuthResult {
     token: String!
 }
 
+type Bird {
+    age: Int
+    comment: String
+    diseases: [Disease]!
+    doctor: User
+    id: ID!
+    name: String!
+    updatedAt: Date
+}
+
+type Cat {
+    age: Int
+    comment: String
+    diseases: [Disease]!
+    doctor: User
+    id: ID!
+    name: String!
+    updatedAt: Date
+}
+
+type Disease {
+    desc: String
+    id: ID!
+    name: String!
+    type: DiseaseType!
+}
+
+type Dog {
+    age: Int
+    comment: String
+    diseases: [Disease]!
+    doctor: User
+    id: ID!
+    name: String!
+    updatedAt: Date
+}
+
+type Medicine {
+    heal: [DiseaseType!]!
+    id: ID!
+    name: String!
+}
+
 type Mutation {
+    addAnimal(input: AnimalAddInput!): Animal!
+    addDisease(input: DiseaseInput!): Disease!
+    addMedicine(input: MedicineInput!): Medicine!
     profile: ProfileMutations
+    updateAnimal(id: ID!, input: AnimalUpdateInput!, partial: Boolean): Animal!
+    updateDisease(id: ID!, input: DiseaseInput!): Disease!
+    updateMedicine(id: ID!, input: MedicineInput!): Medicine!
 }
 
 type Profile {
-    email: String!
     id: ID!
-    name: String!
+    nickname: String!
     signUpDate: Date!
 }
 
 type ProfileMutations {
     password: ProfilePasswordMutations
-    signin(email: String!, password: String!): AuthResult!
-    signup(email: String!, password: String!): AuthResult!
+    signin(nickname: String!, password: String!): AuthResult!
+    signup(nickname: String!, password: String!): AuthResult!
     update(input: UpdateProfileInput!): Profile!
 }
 
@@ -32,27 +83,88 @@ type ProfilePasswordMutations {
 }
 
 type Query {
+    animals: [Animal!]!
+    diseases: [Disease!]!
+    medicines: [Medicine!]!
     profile: Profile
+    users: [User!]!
 }
 
 type ResetPassword {
     success: Boolean!
 }
 
+type Subscription {
+    addedAnimal: Animal!
+    addedDisease: Disease!
+    addedMedicine: Medicine!
+    addedUser: User!
+    removedAnimal: Animal!
+    removedDisease: Disease!
+    removedMedicine: Medicine!
+    removedUser: User!
+    updatedAnimal: Animal!
+    updatedDisease: Disease!
+    updatedMedicine: Medicine!
+    updatedUser: User!
+}
+
 type User {
     id: ID!
-    name: String!
+    nickname: String!
     signUpDate: Date!
+}
+
+enum AnimalType {
+    Bird
+    Cat
+    Dog
+}
+
+enum DiseaseType {
+    broken
+    cold
+    parasites
+    stomach
 }
 
 "Date as iso string"
 scalar Date
+
+input AnimalAddInput {
+    age: Int
+    comment: String
+    diseaseIds: [ID!]
+    doctorId: ID
+    name: String!
+    type: AnimalType!
+}
+
+input AnimalUpdateInput {
+    age: Int
+    comment: String
+    diseaseIds: [ID!]
+    doctorId: ID
+    name: String
+    type: AnimalType
+}
 
 input ChangePasswordInput {
     newPassword: String!
     password: String!
 }
 
+input DiseaseInput {
+    desc: String
+    name: String!
+    type: DiseaseType!
+}
+
+input MedicineInput {
+    heal: [DiseaseType!]!
+    name: String!
+}
+
 input UpdateProfileInput {
-    name: String
+    nickname: String!
 }

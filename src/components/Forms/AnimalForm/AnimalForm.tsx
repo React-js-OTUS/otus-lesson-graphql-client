@@ -3,10 +3,9 @@ import cn from 'clsx';
 import { CommentField } from 'src/components/Forms/AnimalForm/CommentField';
 import { AnimalTypeField } from 'src/components/Forms/AnimalForm/AnimalTypeField';
 import { AgeField } from 'src/components/Forms/AnimalForm/AgeField';
-import { useSelector } from 'react-redux';
-import { diseasesSelectors } from 'src/store/diseases';
 import { DiseasesField } from 'src/components/Forms/AnimalForm/DiseasesField';
 import { useTranslation } from 'react-i18next';
+import { useStore } from 'src/client/StoreProvider';
 import { AnimalFormProps, AnimalFormRequired } from './types';
 import { NameField } from './NameField';
 import s from './AnimalForm.sass';
@@ -36,7 +35,7 @@ export const AnimalForm = memo<AnimalFormProps>(
     } = formManager;
     const { t } = useTranslation();
 
-    const diseases = useSelector(diseasesSelectors.get);
+    const { diseases } = useStore();
 
     return (
       <form ref={formElement} onSubmit={handleSubmit} className={cn(s.root, className)}>

@@ -3,7 +3,7 @@ import { SelectProps } from 'antd/lib/select';
 import { Select } from 'antd';
 import cn from 'clsx';
 import { TextSelection } from 'src/components/TextSelection';
-import { TFunction } from 'i18next/typescript/t';
+import { TFunction } from 'i18next/typescript/t.v4';
 import { useTranslation } from 'react-i18next';
 import s from './factory.module.sass';
 
