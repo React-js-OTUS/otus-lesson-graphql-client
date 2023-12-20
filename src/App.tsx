@@ -6,7 +6,6 @@ import { ClientProvider } from 'src/client';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { DndProvider } from 'react-dnd';
-import { StoreProvider } from 'src/client/StoreProvider';
 import { isTouchDevice } from 'src/utils/isTouchDevice';
 import { LocalizationInitiator } from './localization/LocalizationInitiator';
 import { Navigation } from './navigation/Navigation';
@@ -19,19 +18,17 @@ function App() {
   return (
     <BrowserRouter>
       <ClientProvider>
-        <StoreProvider>
-          <Provider store={store}>
-            <Head />
-            <LocalizationInitiator />
-            <ThemeProvider>
-              <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
-                <Layout>
-                  <Navigation />
-                </Layout>
-              </DndProvider>
-            </ThemeProvider>
-          </Provider>
-        </StoreProvider>
+        <Provider store={store}>
+          <Head />
+          <LocalizationInitiator />
+          <ThemeProvider>
+            <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
+              <Layout>
+                <Navigation />
+              </Layout>
+            </DndProvider>
+          </ThemeProvider>
+        </Provider>
       </ClientProvider>
     </BrowserRouter>
   );

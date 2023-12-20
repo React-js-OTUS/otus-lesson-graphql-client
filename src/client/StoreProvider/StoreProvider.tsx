@@ -52,90 +52,106 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
   const medicineRemovedSub = useSubscription<SubRemovedMedicineResponse>(SUB_REMOVED_MEDICINE);
 
   useEffect(() => {
-    if (animalAddedSub.data) {
+    if (animalAddedSub.data?.addedAnimal) {
       const cached = client.readQuery<GetInitialDataResponse>({ query: GET_INITIAL_DATA });
-      const _data = {
-        ...cached,
-        animals: [...cached.animals, animalAddedSub.data.addedAnimal],
-      };
-      client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      if (cached) {
+        const _data = {
+          ...cached,
+          animals: [...cached.animals, animalAddedSub.data.addedAnimal],
+        };
+        client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      }
     }
   }, [client, animalAddedSub.data]);
 
   useEffect(() => {
-    if (animalRemovedSub.data) {
+    if (animalRemovedSub.data?.removedAnimal) {
       const cached = client.readQuery<GetInitialDataResponse>({ query: GET_INITIAL_DATA });
-      const _data = {
-        ...cached,
-        animals: cached.animals.filter((i) => i.id !== animalRemovedSub.data?.removedAnimal?.id),
-      };
-      client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      if (cached) {
+        const _data = {
+          ...cached,
+          animals: cached.animals.filter((i) => i.id !== animalRemovedSub.data?.removedAnimal?.id),
+        };
+        client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      }
     }
   }, [client, animalRemovedSub.data]);
 
   useEffect(() => {
-    if (diseaseAddedSub.data) {
+    if (diseaseAddedSub.data?.addedDisease) {
       const cached = client.readQuery<GetInitialDataResponse>({ query: GET_INITIAL_DATA });
-      const _data = {
-        ...cached,
-        diseases: [...cached.diseases, diseaseAddedSub.data.addedDisease],
-      };
-      client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      if (cached) {
+        const _data = {
+          ...cached,
+          diseases: [...cached.diseases, diseaseAddedSub.data.addedDisease],
+        };
+        client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      }
     }
   }, [client, diseaseAddedSub.data]);
 
   useEffect(() => {
-    if (diseaseRemovedSub.data) {
+    if (diseaseRemovedSub.data?.removedDisease) {
       const cached = client.readQuery<GetInitialDataResponse>({ query: GET_INITIAL_DATA });
-      const _data = {
-        ...cached,
-        diseases: cached.diseases.filter((i) => i.id !== diseaseRemovedSub.data?.removedDisease?.id),
-      };
-      client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      if (cached) {
+        const _data = {
+          ...cached,
+          diseases: cached.diseases.filter((i) => i.id !== diseaseRemovedSub.data?.removedDisease?.id),
+        };
+        client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      }
     }
   }, [client, diseaseRemovedSub.data]);
 
   useEffect(() => {
-    if (medicineAddedSub.data) {
+    if (medicineAddedSub.data?.addedMedicine) {
       const cached = client.readQuery<GetInitialDataResponse>({ query: GET_INITIAL_DATA });
-      const _data = {
-        ...cached,
-        medicines: [...cached.medicines, medicineAddedSub.data.addedMedicine],
-      };
-      client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      if (cached) {
+        const _data = {
+          ...cached,
+          medicines: [...cached.medicines, medicineAddedSub.data.addedMedicine],
+        };
+        client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      }
     }
   }, [client, medicineAddedSub.data]);
 
   useEffect(() => {
-    if (medicineRemovedSub.data) {
+    if (medicineRemovedSub.data?.removedMedicine) {
       const cached = client.readQuery<GetInitialDataResponse>({ query: GET_INITIAL_DATA });
-      const _data = {
-        ...cached,
-        medicines: cached.medicines.filter((i) => i.id !== medicineRemovedSub.data?.removedMedicine?.id),
-      };
-      client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      if (cached) {
+        const _data = {
+          ...cached,
+          medicines: cached.medicines.filter((i) => i.id !== medicineRemovedSub.data?.removedMedicine?.id),
+        };
+        client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      }
     }
   }, [client, medicineRemovedSub.data]);
 
   useEffect(() => {
-    if (userAddedSub.data) {
+    if (userAddedSub.data?.addedUser) {
       const cached = client.readQuery<GetInitialDataResponse>({ query: GET_INITIAL_DATA });
-      const _data = {
-        ...cached,
-        users: [...cached.users, userAddedSub.data.addedUser],
-      };
-      client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      if (cached) {
+        const _data = {
+          ...cached,
+          users: [...cached.users, userAddedSub.data.addedUser],
+        };
+        client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      }
     }
   }, [client, userAddedSub.data]);
 
   useEffect(() => {
-    if (userRemovedSub.data) {
+    if (userRemovedSub.data?.removedUser) {
       const cached = client.readQuery<GetInitialDataResponse>({ query: GET_INITIAL_DATA });
-      const _data = {
-        ...cached,
-        users: cached.users.filter((i) => i.id !== userRemovedSub.data?.removedUser?.id),
-      };
-      client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      if (cached) {
+        const _data = {
+          ...cached,
+          users: cached.users.filter((i) => i.id !== userRemovedSub.data?.removedUser?.id),
+        };
+        client.writeQuery({ query: GET_INITIAL_DATA, data: _data });
+      }
     }
   }, [client, userRemovedSub.data]);
 
