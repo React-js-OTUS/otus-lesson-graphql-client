@@ -63,9 +63,10 @@ export const Cabinet: FC = () => {
     setAnimal((v) => (v?.id === value.id ? null : value));
   };
 
-  const canDrop = (anim: Animal, medicine: Medicine) =>
-    anim.diseases?.some((i) => medicine.heal?.some((l) => l === i.type));
-
+  const canDrop = (anim: Animal, medicine: Medicine) => {
+    if (!anim || !anim.diseases) return false;
+    return anim.diseases.some((i) => medicine.heal?.some((l) => l === i.type));
+  };
   const onTake = (anim: Animal, medicine: Medicine) => {
     updateAnimal({
       variables: {
