@@ -2,22 +2,21 @@ import React, { FC, useState } from 'react';
 
 // const NativeDragComponent: FC = () => {
 //   const [list, setList] = useState([{ currentList: 'first' }]);
-
+//
 //   const handleDrop = (e: any) => {
 //     e.preventDefault();
 //     const idElement = e.dataTransfer.getData('text');
 //     console.log('idElement', idElement);
-
+//
 //     if (idElement === 'first') {
 //       setList([{ currentList: 'second' }]);
 //     } else {
 //       setList([{ currentList: 'first' }]);
 //     }
 //   };
-
+//
 //   return (
 //     <div onDragOver={(e) => e.preventDefault()} onDrop={(e) => handleDrop(e)}>
-
 //       <div style={{ width: '300px', height: '300px', background: 'blue' }}>
 //         {list.map(({ currentList }, index) => {
 //           if (currentList === 'first') {
@@ -28,7 +27,6 @@ import React, { FC, useState } from 'react';
 //                 style={{ width: '100px', height: '100px', background: 'red' }}
 //                 draggable
 //                 onDragStart={(e: any) => {
-//                   console.log('e.target.id', e.target.id);
 //                   e.dataTransfer.setData('text', e.target.id);
 //                 }}
 //               />
@@ -36,7 +34,7 @@ import React, { FC, useState } from 'react';
 //           }
 //         })}
 //       </div>
-
+//
 //       <div style={{ width: '300px', height: '300px', background: 'green' }}>
 //         {list.map(({ currentList }, index) => {
 //           if (currentList === 'second') {
@@ -68,7 +66,7 @@ const NativeDragComponent: FC = () => {
 
   // `handleDrop` проверяет, в какую область был сброшен элемент.
   // Если текущий `id` квадратика совпадает с `targetList`, состояние `list` обновляется.
-  const handleDrop = (e: any, targetList: 'first' | 'second') => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, targetList: 'first' | 'second') => {
     e.preventDefault();
     const idElement = e.dataTransfer.getData('text');
 
@@ -95,9 +93,8 @@ const NativeDragComponent: FC = () => {
                 style={{ width: '100px', height: '100px', background: 'red' }}
                 draggable
                 // `onDragStart` сохраняет `id` квадратика в `dataTransfer`.
-                onDragStart={(e: any) => {
-                  console.log('e.target.id', e.target.id);
-                  e.dataTransfer.setData('text', e.target.id);
+                onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
+                  e.dataTransfer.setData('text', (e.target as HTMLDivElement).id);
                 }}
               />
             )
@@ -117,9 +114,8 @@ const NativeDragComponent: FC = () => {
                 id={currentList}
                 style={{ width: '100px', height: '100px', background: 'red' }}
                 draggable
-                onDragStart={(e: any) => {
-                  console.log('e.target.id', e.target.id);
-                  e.dataTransfer.setData('text', e.target.id);
+                onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
+                  e.dataTransfer.setData('text', (e.target as HTMLDivElement).id);
                 }}
               />
             )
