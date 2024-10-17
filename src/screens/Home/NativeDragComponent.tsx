@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 // const NativeDragComponent: FC = () => {
 //   const [list, setList] = useState([{ currentList: 'first' }]);
 //
-//   const handleDrop = (e: any) => {
+//   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
 //     e.preventDefault();
 //     const idElement = e.dataTransfer.getData('text');
 //     console.log('idElement', idElement);
@@ -26,7 +26,7 @@ import React, { FC, useState } from 'react';
 //                 id={currentList}
 //                 style={{ width: '100px', height: '100px', background: 'red' }}
 //                 draggable
-//                 onDragStart={(e: any) => {
+//                 onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
 //                   e.dataTransfer.setData('text', e.target.id);
 //                 }}
 //               />
@@ -46,7 +46,7 @@ import React, { FC, useState } from 'react';
 //                 draggable
 //                 // `onDragStart` сохраняет `id` квадратика в `dataTransfer`.
 //                 // В onDragStart событии, id элемента берется из DOM элемента, на котором событие было вызвано.
-//                 onDragStart={(e: any) => {
+//                 onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
 //                   console.log('e.target.id', e.target.id);
 //                   e.dataTransfer.setData('text', e.target.id);
 //                 }}
