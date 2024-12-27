@@ -3,11 +3,9 @@ import { Mutation, MutationUpdateDiseaseArgs } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
 
 export const UPDATE_DISEASE = gql`
-  mutation UpdateDisease($updateDiseaseId: ID!, $input: DiseaseInput!) {
-    updateDisease(id: $updateDiseaseId, input: $input) {
+  mutation updateDisease($id: ID!, $input: DiseaseInput!) {
+    updateDisease(id: $id, input: $input) {
       id
-      name
-      type
     }
   }
 `;

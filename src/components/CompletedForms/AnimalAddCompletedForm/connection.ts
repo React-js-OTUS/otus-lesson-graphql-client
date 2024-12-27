@@ -3,15 +3,15 @@ import { Mutation, MutationAddAnimalArgs } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
 
 export const ADD_ANIMAL = gql`
-  mutation AddAnimal($input: AnimalAddInput!) {
+  mutation addAnimal($input: AnimalAddInput!) {
     addAnimal(input: $input) {
-      ... on Bird {
+      ... on Cat {
         id
       }
       ... on Dog {
         id
       }
-      ... on Cat {
+      ... on Bird {
         id
       }
     }

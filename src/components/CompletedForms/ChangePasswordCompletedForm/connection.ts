@@ -5,7 +5,7 @@ import { get } from 'src/utils/unchanged';
 export type ChangePasswordVars = ProfilePasswordMutationsChangeArgs;
 export type ChangePasswordResponse = Pick<Mutation, 'profile'>;
 export const CHANGE_PASSWORD = gql`
-  mutation UpdateAnimal($input: ChangePasswordInput!) {
+  mutation changePassword($input: ChangePasswordInput!) {
     profile {
       password {
         change(input: $input) {

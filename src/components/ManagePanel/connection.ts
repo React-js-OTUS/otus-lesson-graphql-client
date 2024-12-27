@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { Mutation } from 'src/server.types';
+import { Mutation, MutationUpdateAnimalArgs } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
 
 export const SET_DOCTOR_FOR_ANIMAL = gql`
@@ -17,6 +17,7 @@ export const SET_DOCTOR_FOR_ANIMAL = gql`
     }
   }
 `;
+
 export type SetDoctorForAnimalData = Pick<Mutation, 'updateAnimal'>;
 export type SetDoctorForAnimalVars = {
   id: string;
