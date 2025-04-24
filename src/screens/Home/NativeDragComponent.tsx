@@ -62,17 +62,17 @@ import React, { FC, useState } from 'react';
 // Компонент проверяет значение `currentList` для каждого элемента в `list`
 // и рендерит квадратик в соответствующей области.
 const NativeDragComponent: FC = () => {
-  const [list, setList] = useState([{ currentList: 'first' }]);
+  const [list, setList] = useState([{ currentList: 'first' }, { currentList: 'first' }]);
 
   // `handleDrop` проверяет, в какую область был сброшен элемент.
   // Если текущий `id` квадратика совпадает с `targetList`, состояние `list` обновляется.
   const handleDrop = (e: React.DragEvent<HTMLDivElement>, targetList: 'first' | 'second') => {
     e.preventDefault();
-    const idElement = e.dataTransfer.getData('text');
+    const fromList = e.dataTransfer.getData('fromList');
 
-    if (idElement === 'first' && targetList === 'second') {
+    if (fromList === 'first' && targetList === 'second') {
       setList([{ currentList: 'second' }]);
-    } else if (idElement === 'second' && targetList === 'first') {
+    } else if (fromList === 'second' && targetList === 'first') {
       setList([{ currentList: 'first' }]);
     }
   };
@@ -92,9 +92,8 @@ const NativeDragComponent: FC = () => {
                 id={currentList}
                 style={{ width: '100px', height: '100px', background: 'red' }}
                 draggable
-                // `onDragStart` сохраняет `id` квадратика в `dataTransfer`.
                 onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
-                  e.dataTransfer.setData('text', (e.target as HTMLDivElement).id);
+                  e.dataTransfer.setData('fromList', 'first');
                 }}
               />
             )
@@ -115,7 +114,7 @@ const NativeDragComponent: FC = () => {
                 style={{ width: '100px', height: '100px', background: 'red' }}
                 draggable
                 onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
-                  e.dataTransfer.setData('text', (e.target as HTMLDivElement).id);
+                  e.dataTransfer.setData('fromList', 'second');
                 }}
               />
             )
