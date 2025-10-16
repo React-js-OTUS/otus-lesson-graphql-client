@@ -84,19 +84,18 @@ const NativeDragComponent: FC = () => {
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => handleDrop(e, 'first')}
       >
-        {list.map(
-          ({ currentList }, index) =>
-            currentList === 'first' && (
-              <div
-                key={index}
-                id={currentList}
-                style={{ width: '100px', height: '100px', background: 'red' }}
-                draggable
-                onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
-                  e.dataTransfer.setData('fromList', 'first');
-                }}
-              />
-            )
+        {list.map(({ currentList }, index) =>
+          currentList === 'first' ? (
+            <div
+              key={index}
+              id={currentList}
+              style={{ width: '100px', height: '100px', background: 'red' }}
+              draggable
+              onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
+                e.dataTransfer.setData('fromList', 'first');
+              }}
+            />
+          ) : null
         )}
       </div>
 
@@ -105,19 +104,18 @@ const NativeDragComponent: FC = () => {
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => handleDrop(e, 'second')}
       >
-        {list.map(
-          ({ currentList }, index) =>
-            currentList === 'second' && (
-              <div
-                key={index}
-                id={currentList}
-                style={{ width: '100px', height: '100px', background: 'red' }}
-                draggable
-                onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
-                  e.dataTransfer.setData('fromList', 'second');
-                }}
-              />
-            )
+        {list.map(({ currentList }, index) =>
+          currentList === 'second' ? (
+            <div
+              key={index}
+              id={currentList}
+              style={{ width: '100px', height: '100px', background: 'red' }}
+              draggable
+              onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
+                e.dataTransfer.setData('fromList', 'second');
+              }}
+            />
+          ) : null
         )}
       </div>
     </div>
