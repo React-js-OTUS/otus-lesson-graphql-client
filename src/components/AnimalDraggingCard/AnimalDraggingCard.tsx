@@ -1,19 +1,27 @@
-import React, { FC } from 'react';
+import React from 'react';
 import cn from 'clsx';
-import { AnimalEditingCardProps, AnimalEditingCard } from 'src/components/AnimalEditingCard';
-import { useDrag } from 'react-dnd';
+import { useDraggable } from '@dnd-kit/core';
+import {
+  AnimalEditingCard,
+  AnimalEditingCardProps,
+} from 'src/components/AnimalEditingCard';
 import s from './AnimalDraggingCard.sass';
 
-export type AnimalDraggingCardProps = AnimalEditingCardProps & {
-  dndName: string;
-};
+export const AnimalDraggingCard = (props: AnimalEditingCardProps) => {
+  const { value: animal } = props;
 
-export const AnimalDraggingCard: FC<AnimalDraggingCardProps> = ({ dndName, className, ...props }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: dndName,
-    item: props.value,
-    collect: (monitor) => ({ isDragging: monitor.isDragging() }),
-  }));
+  const { setNodeRef, listeners, attributes, isDragging } = useDraggable({
+    id: animal.id,
+    data: { dragItem: { type: 'animal', value: animal }},
+  });
 
-  return <AnimalEditingCard className={cn(s.root, isDragging && s.isDragging, className)} {...props} ref={drag} />;
+  return (
+    <AnimalEditingCard
+      ref={setNodeRef}
+      {...props}
+      {...listeners}
+      {...attributes}
+      className={cn(s.root, isDragging && s.isDragging)}
+    />
+  );
 };

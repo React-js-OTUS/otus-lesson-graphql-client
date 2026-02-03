@@ -1,19 +1,33 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { useDraggable } from '@dnd-kit/core';
 import cn from 'clsx';
-import { MedicineEditingCardProps, MedicineEditingCard } from 'src/components/MedicineEditingCard';
-import { useDrag } from 'react-dnd';
+import {
+  MedicineEditingCard,
+  MedicineEditingCardProps,
+} from 'src/components/MedicineEditingCard';
 import s from './MedicineDraggingCard.sass';
 
-export type MedicineDraggingCardProps = MedicineEditingCardProps & {
-  dndName: string;
+export const MedicineDraggingCard = (props: MedicineEditingCardProps) => {
+  const { value: medicine } = props;
+
+  const { setNodeRef, listeners, attributes, isDragging } = useDraggable({
+    id: medicine.id,
+    data: {
+      dragItem: {
+        type: 'medicine',
+        value: medicine,
+      },
+    },
+  });
+
+  return (
+    <MedicineEditingCard
+      ref={setNodeRef}
+      {...props}
+      {...listeners}
+      {...attributes}
+      className={cn(s.root, isDragging && s.isDragging)}
+    />
+  );
 };
 
-export const MedicineDraggingCard: FC<MedicineDraggingCardProps> = ({ dndName, className, ...props }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: dndName,
-    item: props.value,
-    collect: (monitor) => ({ isDragging: monitor.isDragging() }),
-  }));
-
-  return <MedicineEditingCard className={cn(s.root, isDragging && s.isDragging, className)} {...props} ref={drag} />;
-};

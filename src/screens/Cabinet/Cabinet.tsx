@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from 'src/components/Page';
 import { Title } from 'src/components/Title';
@@ -17,8 +17,7 @@ import { useStore } from 'src/client/StoreProvider';
 import { TO_HEAL_ANIMAL, ToHealAnimalData, ToHealAnimalVars } from './connection';
 import s from './Cabinet.sass';
 
-const dndName = 'cabinet-table';
-export const Cabinet: FC = () => {
+export const Cabinet = () => {
   const { t } = useTranslation();
   const { medicines, animals } = useStore();
   const [animal, setAnimal] = useState<Animal>();
@@ -89,7 +88,7 @@ export const Cabinet: FC = () => {
       <div className={s.main}>
         <div className={s.table}>
           <Title>{t`screens.Cabinet.table`}</Title>
-          <AnimalDropInfoCard dndName={dndName} value={animal} onTake={onTake} canDrop={canDrop} />
+          <AnimalDropInfoCard value={animal} onTake={onTake} canDrop={canDrop} />
         </div>
         <div>
           <div className={s.line}>
@@ -100,7 +99,7 @@ export const Cabinet: FC = () => {
           <MedicineDraggingCards
             className={s.medicines}
             value={medicines}
-            dndName={dndName}
+      
             empty={t`screens.Cabinet.empty`}
           />
         </div>
