@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { Select, SelectProps } from 'antd';
 import cn from 'clsx';
 import { Disease } from 'src/server.types';
@@ -16,7 +16,7 @@ export type DiseasesSelectProps = SelectProps & {
   onChange: (value: Disease['id'][]) => void;
 };
 
-export const DiseasesSelect: FC<DiseasesSelectProps> = ({
+export const DiseasesSelect = ({
   className,
   disabled,
   placeholder,
@@ -24,7 +24,7 @@ export const DiseasesSelect: FC<DiseasesSelectProps> = ({
   items,
   value,
   onChange,
-}) => {
+}: DiseasesSelectProps) => {
   const [search, onSearch] = useState<string>();
 
   const filterOption = (input: string, option: { title: string; value: string }) =>
@@ -42,14 +42,14 @@ export const DiseasesSelect: FC<DiseasesSelectProps> = ({
       onChange={onChange}
       onSearch={onSearch}
     >
-      {items?.map((item) => (
-        <Select.Option key={item.id} title={item.name}>
+      {items?.map((item) => {
+        return <Select.Option key={item.id} title={item.name}>
           <div className={s.item}>
             <DiseaseIcon value={item.type} />
             <TextSelection text={item.name} selection={search} />
           </div>
-        </Select.Option>
-      ))}
+        </Select.Option>;
+      })}
     </Select>
   );
 };

@@ -7,6 +7,12 @@
   +theme(background-color, mainBg)
   +theme(box-shadow, boxShadow)
 
+  &.isOver
+    +theme(background-color, mainRed)
+
+  &.canDrop
+    +theme(background-color, mainGreen)
+
 .top
   display: flex
   align-items: center

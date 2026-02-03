@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import cn from 'clsx';
 import { AnimalDraggingCards } from 'src/components/AnimalDraggingCards';
 import { Animal, User } from 'src/server.types';
@@ -23,9 +23,7 @@ export type ManagePanelProps = {
   className?: string;
 };
 
-const DND_KEY = 'manage-panel';
-
-export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
+export const ManagePanel = ({ className }: ManagePanelProps) => {
   const { t } = useTranslation();
   const { users, profile, animals } = useStore();
 
@@ -72,14 +70,12 @@ export const ManagePanel: FC<ManagePanelProps> = ({ className }) => {
         {t`components.ManagePanel.convalescents`}
       </Title>
       <AnimalDraggingCards
-        dndName={DND_KEY}
         value={animalsByTypes.convalescents}
         empty={t`components.ManagePanel.empty`}
       />
       <Title className={s.title}>{t`components.ManagePanel.doctors`}</Title>
       <UsersPanel
         canDrop={canDrop}
-        dndName={DND_KEY}
         animals={animalsByTypes.forDoctors}
         value={users}
         onTake={onTake}

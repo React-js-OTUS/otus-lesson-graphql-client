@@ -10,14 +10,15 @@ import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import s from './AnimalInfoCard.sass';
 
 export type AnimalInfoCardProps = React.HTMLAttributes<HTMLDivElement> & {
-  className?: string;
+  isOver?: boolean;
+  isAllowed?: boolean;
   value: Animal;
 };
 
 export type AnimalInfoCardRef = HTMLDivElement;
 
 export const AnimalInfoCard = forwardRef<AnimalInfoCardRef, AnimalInfoCardProps>(
-  ({ className, value, ...props }, ref) => {
+  ({ value, isOver, isAllowed, ...props }, ref) => {
     const { t } = useTranslation();
     if (!value) return null;
 
@@ -31,7 +32,7 @@ export const AnimalInfoCard = forwardRef<AnimalInfoCardRef, AnimalInfoCardProps>
     }))();
 
     return (
-      <div ref={ref} {...props} className={cn(s.root, className)}>
+      <div ref={ref} {...props} className={cn(s.root, isOver && s.isOver, isOver && isAllowed && s.canDrop)}>
         <div className={s.top}>
           <div className={s.line}>
             <AnimalIcon value={value.__typename as AnimalType} />

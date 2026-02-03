@@ -1,38 +1,44 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { useDroppable } from '@dnd-kit/core';
 import cn from 'clsx';
 import { Animal, User } from 'src/server.types';
-import { useDrop } from 'react-dnd';
 import { AnimalEditingCard } from 'src/components/AnimalEditingCard';
 import s from './UserCart.sass';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store';
 
-export type UserCartProps = {
-  className?: string;
-  dndName: string;
+type Props = {
   value: User;
-  onTake: (doctor: User, animal: Animal) => void;
-  canDrop: (doctor: User, animal: Animal) => boolean;
   animals?: Animal[];
+  canDrop: (user: User, animal: Animal) => boolean;
+  onTake: (user: User, animal: Animal) => void;
 };
 
-export const UserCart: FC<UserCartProps> = ({ className, value, animals, canDrop, dndName, onTake }) => {
-  const [{ isOver, _canDrop }, drop] = useDrop(() => ({
-    drop: (item: Animal) => onTake(value, item),
-    canDrop: (item: Animal) => canDrop(value, item),
-    accept: dndName,
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      _canDrop: monitor.canDrop(),
-    }),
-  }));
-  if (!value) return null;
+export const UserCart = ({ value, animals, canDrop, onTake }: Props) => {
+  const droppableId = `user-${value.id}`;
+
+  const { setNodeRef } = useDroppable({
+    id: droppableId,
+    data: { value, canDrop, onTake },
+  });
+
+  const activeOverId = useSelector((state: RootState) => state.dnd.activeOverId);
+  const isAllowed = useSelector((state: RootState) => state.dnd.isAllowed);
+
+  const isOver = activeOverId === droppableId;
+
   return (
-    <div className={cn(s.root, className)}>
+    <div className={s.root}>
       <div className={s.title}>{value.nickname || value.id}</div>
-      <div ref={drop} className={cn(s.body, isOver && s.isOver, _canDrop && s.canDrop)}>
-        {animals?.map((item: Animal) => (
-          <AnimalEditingCard value={item} key={item.id} />
+      <div
+        ref={setNodeRef}
+        className={cn(s.body, isOver && s.isOver, isOver && isAllowed && s.canDrop)}
+      >
+        {animals?.map((a) => (
+          <AnimalEditingCard key={a.id} value={a} />
         ))}
       </div>
     </div>
   );
 };
+

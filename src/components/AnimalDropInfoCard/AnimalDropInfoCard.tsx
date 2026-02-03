@@ -1,47 +1,42 @@
-import React, { FC, useRef } from 'react';
-import cn from 'clsx';
+import React from 'react';
+import { useDroppable } from '@dnd-kit/core';
 import { Animal, Medicine } from 'src/server.types';
 import { AnimalInfoCard, AnimalInfoCardProps } from 'src/components/AnimalInfoCard';
-import { useDrop } from 'react-dnd';
-import s from './AnimalDropInfoCard.sass';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store';
 
-export type AnimalDropInfoCardProps = AnimalInfoCardProps & {
-  dndName: string;
-  onTake: (animal: Animal, medicine: Medicine) => void;
+type Props = AnimalInfoCardProps & {
   canDrop: (animal: Animal, medicine: Medicine) => boolean;
+  onTake: (animal: Animal, medicine: Medicine) => void;
 };
 
-export type AnimalDropInfoCardRef = HTMLDivElement;
-
-export const AnimalDropInfoCard: FC<AnimalDropInfoCardProps> = ({
-  className,
-  value,
-  canDrop,
-  onTake,
-  dndName,
-  ...props
-}) => {
-  const valueCopy = useRef(value);
-  valueCopy.current = value;
-
-  const [{ isOver, _canDrop }, drop] = useDrop(() => ({
-    drop: (item: Medicine) => onTake(valueCopy.current, item),
-    canDrop: (item: Medicine) => canDrop(valueCopy.current, item),
-    accept: dndName,
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      _canDrop: monitor.canDrop(),
-    }),
-  }));
-
+export const AnimalDropInfoCard = ({ value, canDrop, onTake, ...props }: Props) => {
   if (!value) return null;
+
+  const droppableId = `animal-${value.id}`;
+
+  const activeOverId = useSelector((state: RootState) => state.dnd.activeOverId);
+  const isAllowed = useSelector((state: RootState) => state.dnd.isAllowed);
+
+  const isOver = activeOverId === droppableId;
+
+  const { setNodeRef } = useDroppable({
+    id: droppableId,
+    data: { value, canDrop, onTake },
+  });
 
   return (
     <AnimalInfoCard
-      ref={drop}
+      ref={setNodeRef}
       {...props}
       value={value}
-      className={cn(s.root, isOver && s.isOver, _canDrop && s.canDrop, className)}
+      isOver={isOver}
+      isAllowed={isOver && isAllowed}
     />
   );
 };
+
+
+
+
+
